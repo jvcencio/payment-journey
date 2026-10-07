@@ -1,0 +1,13 @@
+License selection — STATUS: OPEN
+
+Payment Journey is intended for open-source release. The bootstrap handoff did
+not select a license or identify the copyright holder. This file is a status
+notice, not an open-source license or a grant of redistribution rights.
+
+Before publishing an open-source release, the project owner must select the
+license, confirm ownership and third-party compatibility, and replace this
+notice with the complete applicable license text. See
+ docs/governance/open-questions.md (O-01).
+
+Third-party standards and specifications are outside any future project license
+unless their own redistribution terms expressly permit inclusion.
