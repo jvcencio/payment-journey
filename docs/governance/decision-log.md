@@ -126,3 +126,14 @@ Record date, decision, status, context, rationale, alternatives and why rejected
 - Alternatives: Backend, database, fuzzy correlation, inferred MT components and graph/component frameworks excluded from this slice by owner.
 - Implications: D-009 stack proposal is superseded for the first slice; policy and export/import deferred. External-authority baseline remains a full-MVP release gate.
 - Related artifact: [adopted gate](../architecture/implementation-gate.md).
+
+## D-012 — First-slice implementation boundaries and verification
+
+- Date: 2026-10-07
+- Status: IMPLEMENTED under D-011; no expansion of product scope.
+- Decision: Use the documented block-4-only fixture envelope, exact-value correspondence, UTF-16 locators into unchanged raw artifacts, SHA-256 UTF-8 capture hashes, and bounded worker-isolated parsing.
+- Context: Convert the accepted narrow semantic subset into executable Fixture A.
+- Rationale: Preserve observable evidence without claiming complete FIN/XSD/network validation.
+- Alternatives: Full transport envelope validation and broader address inference are outside this slice; no replacement parser was needed.
+- Implications: Other input envelopes/components remain unsupported or visible as uninterpreted data; non-matches remain unresolved. No policy findings or persistent exports are produced.
+- Related artifacts: [parser contract](../architecture/parser-contract.md), [verification](../quality/first-slice-verification.md), [dependency review](../architecture/dependency-review.md).

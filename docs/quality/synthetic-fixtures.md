@@ -1,6 +1,6 @@
 # Synthetic-fixture specification v0.1
 
-**All examples below are fictional semantic test vectors.** No parties, accounts, identifiers, institutions, or transactions are copied from real data. Geographic labels do not identify a real transaction. No executable fixture files or raw-message validity claims exist yet.
+**All examples below are fictional semantic test vectors.** No parties, accounts, identifiers, institutions, or transactions are copied from real data. Geographic labels do not identify a real transaction. Fixture A now has executable raw inputs and a manifest under fixtures/raw-pairs/a-clean-preservation; other scenarios remain specifications. No comprehensive raw-message validity claim is made.
 
 ## Test layers
 

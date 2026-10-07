@@ -1,6 +1,6 @@
 # Payment Journey
 
-![Status: early development — MVP definition](https://img.shields.io/badge/status-early_development_%7C_MVP_definition-blue)
+**Status: first preservation slice implemented · full MVP in development**
 
 Trace what happens to payment data as it moves between formats—and identify where meaning is preserved, transformed, degraded, or lost.
 
@@ -10,7 +10,7 @@ Message validation asks whether an artifact follows a syntax or profile. Payment
 
 ## What it does
 
-Payment Journey is being designed to compare evidence from two artifacts representing the same synthetic payment:
+Payment Journey compares evidence from an explicitly paired synthetic MT103 subset and pacs.008.001.14:
 
 ```text
 MT103
@@ -24,7 +24,7 @@ Canonical Snapshot
 pacs.008
 ```
 
-The planned engine explains preservation, normalization, structuring, derivation, collapse, misplacement, truncation, loss, and unexplained additions. Events compose: information can survive while its structure degrades. These are planned capabilities; no executable analyzer is included yet.
+The first slice identifies exact preservation and exposes unresolved comparisons. The broader taxonomy supports normalization, structuring, derivation, collapse, misplacement, truncation, loss, and unexplained additions; those classifiers remain planned. Events compose: information can survive while its structure degrades.
 
 ## Example finding
 
@@ -53,11 +53,31 @@ The building number and room still appear, but inside a street-name element. A c
 
 ## MVP scope
 
-**Available now:** product definition, six accepted ADRs, domain and adapter contracts, fixture specifications, acceptance criteria, source register, and an open technical proposal.
+**Available now:** browser-only Fixture A, a block-4-only MT103 Option-F adapter, a pacs.008.001.14 adapter accepting exactly one transaction, React-independent canonical snapshots, exact-preservation lineage, and an accessible evidence/coverage UI. Ten material relationships are preserved in the demo. Unknown fields stay visible. Non-matching elements remain explicitly unresolved rather than being guessed as lost.
 
-**Planned for v0.1:** a supported synthetic MT103/pacs.008 pair; debtor and creditor names, useful account references, and postal addresses; deterministic bidirectional lineage; inspectable evidence; visible unmapped data; and a small cited public baseline policy pack.
+**Planned for the full MVP:** other taxonomy classifiers, broader address interpretation, and a versioned authoritative public baseline pack following separate evidence review.
 
-**Not implemented:** parsers, lineage engine, policy pack, UI, executable fixtures, or application CI. Supported message versions and field options remain open. No installation or run command exists yet. See [MVP definition](docs/product/mvp-definition.md) and [non-goals](docs/product/non-goals.md).
+**Not implemented:** policy evaluation, full MT/XSD validation, network-profile conformance, export/import, a backend, or a database. Payloads stay in browser memory during analysis. See [parser boundaries](docs/architecture/parser-contract.md), [MVP definition](docs/product/mvp-definition.md), and [non-goals](docs/product/non-goals.md).
+
+### Run the fictional demo
+
+Use Node.js **24.21.0 LTS** (pinned in `.nvmrc`) and npm:
+
+```sh
+npm ci
+npm run build
+npm run preview
+```
+
+Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded; both parties, accounts, identifiers, institutions and payment are fictional. No secrets or credentials are needed.
+
+```sh
+npm run check
+npx playwright install chromium
+npm run test:browser
+```
+
+`npm run dev` is available for local editing. Production preview uses restrictive CSP; the development server permits localhost HMR traffic and style injection. Browser privacy tests target the production build. A static host is not selected or deployed.
 
 ## Architecture
 
@@ -87,14 +107,14 @@ No network conformance is claimed today. [Policy model](docs/domain/policy-engin
 
 ## Documentation
 
-Start at the [documentation index](docs/index.md), then explore [discovery](docs/product/problem-discovery.md), [taxonomy](docs/domain/evaluation-taxonomy.md), [canonical model](docs/domain/canonical-payment-model.md), [decisions](docs/governance/decision-log.md), [research sources](docs/research/source-register.md), and [technical proposal](docs/architecture/technical-stack-proposal.md).
+Start at the [documentation index](docs/index.md), then explore [discovery](docs/product/problem-discovery.md), [taxonomy](docs/domain/evaluation-taxonomy.md), [canonical model](docs/domain/canonical-payment-model.md), [decisions](docs/governance/decision-log.md), [research sources](docs/research/source-register.md), and [accepted implementation gate](docs/architecture/implementation-gate.md).
 
 ## Roadmap
 
 | Phase | Focus | State |
 | --- | --- | --- |
 | 0 | Product definition and repository bootstrap | Bootstrap complete |
-| 1 | MT103 / pacs.008 address MVP | Planned; decisions open |
+| 1 | MT103 / pacs.008 address MVP | Preservation slice implemented |
 | 2 | Rule-pack expansion | Future |
 | 3 | More participant roles | Future |
 | 4 | More message families | Future |

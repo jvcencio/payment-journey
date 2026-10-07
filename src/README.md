@@ -1,5 +1,5 @@
-# Application source boundary
+# Application source
 
-No application implementation is included in this documentation bootstrap. The proposed module layout and stack are in [technical-stack-proposal.md](../docs/architecture/technical-stack-proposal.md); adoption remains OPEN.
+`domain` defines React-independent canonical/evidence/taxonomy contracts. `artifacts` retains exact input and hashes. `adapters` interpret the narrow MT/pacs subsets. `lineage` emits exact-preservation observations and explicit unresolved accounting. `application` validates the input boundary and orchestrates isolated worker execution. `ui` renders canonical values and evidence using React. Policy remains deferred.
 
-Begin implementation only after resolving the relevant decisions in the [implementation plan](../docs/architecture/implementation-plan.md). This placeholder is not a package or a runnable demo.
+No browser networking API is used by the semantic engine. See the [accepted gate](../docs/architecture/implementation-gate.md) and [parser contract](../docs/architecture/parser-contract.md).

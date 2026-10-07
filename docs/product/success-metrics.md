@@ -1,6 +1,6 @@
 # Success metrics
 
-No production usage, customer validation, or working-MVP results exist yet.
+Fixture A demonstrates ten exact-preservation relationships with complete material-node accounting. No production usage, customer validation, or complete-MVP results are claimed. See [first-slice verification](../quality/first-slice-verification.md).
 
 | Measure | Definition | Initial target |
 | --- | --- | --- |

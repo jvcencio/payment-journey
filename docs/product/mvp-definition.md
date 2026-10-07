@@ -1,6 +1,6 @@
 # MVP v0.1 — frozen scope
 
-STATUS: DEFINED IN HANDOFF; NOT IMPLEMENTED.
+STATUS: Full MVP defined in handoff; first preservation slice implemented under the [accepted gate](../architecture/implementation-gate.md). Other classifiers and policy remain pending.
 
 ## User flow
 
@@ -20,9 +20,9 @@ Debtor and creditor postal addresses are the principal fidelity domain. Names an
 
 Show source and target with clear role labels. Each finding must answer: what happened; where the value came from; what was lost; what became less structured; what was inferred; and which rule informs the judgment. Expose facts and policy results separately. Do not hide warnings behind a summary score. Keyboard access, readable focus states, text event labels, and usable error messages belong in the MVP.
 
-## Coverage decisions still OPEN
+## Original coverage decisions and adopted refinements
 
-Exact MT field options, pacs.008 versions/namespaces, profiles, transaction matching, multi-transaction rejection/selection behavior, parsing limits, confidence semantics, and the first executable rule set require explicit decisions. Do not label all MT103 or all pacs.008 messages “supported.” Failed or incomplete parsing cannot produce an unqualified integrity result.
+The [accepted gate](../architecture/implementation-gate.md) resolves MT Option-F subset, pacs.008.001.14, explicit pairing, single-transaction rejection behavior, confidence and materiality. The [parser contract](../architecture/parser-contract.md) records concrete limits and evidence semantics. The first policy rule set remains open. Do not label all MT103 or all pacs.008 messages “supported.” Failed or incomplete parsing cannot produce an unqualified integrity result.
 
 The structured-source collapse example is a canonical-engine requirement. Raw MT cannot be assumed to expose every canonical address component. The [fixture specification](../quality/synthetic-fixtures.md) separates raw-pair tests from canonical tests.
 

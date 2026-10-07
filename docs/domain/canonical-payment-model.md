@@ -21,12 +21,12 @@ Only debtor/creditor names, useful account references, and postal addresses rece
 
 ## Artifact metadata
 
-Support `artifactId`, `formatFamily`, `messageType`, `messageVersion`, `profile`, `sourceSystem`, `direction`, `rawPayloadReference`, `payloadHash`, `capturedAt`, and `parserVersion`. Unknown metadata must remain unknown, not silently defaulted. Preserve raw payload bytes or an exact recoverable representation; record hash algorithm and encoding with the hash. Storage and hash algorithm selection are **STATUS: OPEN**.
+Support `artifactId`, `formatFamily`, `messageType`, `messageVersion`, `profile`, `sourceSystem`, `direction`, `rawPayloadReference`, `payloadHash`, `capturedAt`, and `parserVersion`. Unknown metadata must remain unknown, not silently defaulted. Preserve raw payload bytes or an exact recoverable representation; record hash algorithm and encoding with the hash. The first slice retains raw strings in memory and hashes their UTF-8 encoding with SHA-256; export/import is deferred.
 
 ## Snapshot requirements
 
 Every interpreted semantic value links to an artifact and transaction, semantic path, original locator/value, interpretation method and confidence. Repeated values need distinct identities; array position alone must not imply correspondence between artifacts. Absence, empty content, parse failure, and unsupported content must be distinguishable.
 
-Snapshot schema version, parser version, interpretation configuration, and artifact identity must be retained for reproducibility. Exact serialization and identifier construction are proposals to resolve before implementation. Matching two supplied artifacts to the same transaction remains **STATUS: OPEN (O-04)**; never infer pairing solely from similar party names.
+Snapshot schema version, parser version, interpretation configuration, and artifact identity must be retained for reproducibility. Exact serialization and identifier construction are proposals to resolve before implementation. The first slice uses explicit user pairing of one source and one target transaction, as adopted in the implementation gate; never infer pairing solely from similar party names.
 
 See [participants](participant-model.md), [addresses](postal-address-model.md), and [provenance](provenance-model.md).

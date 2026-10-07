@@ -32,3 +32,8 @@ One attempted vendor website route could not be retrieved; S-04/S-05 use the off
 For every new source record: stable ID; organization; exact document/page title; URL (or explicitly unavailable); publication/update date if known; access date; authority category; topic; limited supported claim; how it informs the product; source section/edition when used for a rule; redistribution considerations; verification status and reviewer evidence.
 
 Separate page retrieval from clause review, redistribution approval, and rule approval. Mutable sources must be pinned or otherwise version-identified before reproducible evaluations depend on them.
+
+## First-slice implementation references — 2026-10-07
+
+- S-08: lddubeau/saxes, [repository documentation](https://github.com/lddubeau/saxes), publication date not stated; accessed 2026-10-07. Category: software implementation documentation. Inspected together with installed saxes 6.0.0 source/types for namespace events and position semantics. Package declares ISC; no source is copied into project-authored code. Dependency redistribution review remains separate.
+- S-09: ISO 20022 Registration Authority, [ISO message catalogue filtered to pacs.008](https://www.iso20022.org/iso-20022-message-definitions?business-domain%5B0%5D=1&search=pacs.008), update date not stated; accessed 2026-10-07. Category: ISO message catalogue. Confirms pacs.008.001.14 identifier; does not establish fixture conformance or an address rule. Link only, no schema bundled.

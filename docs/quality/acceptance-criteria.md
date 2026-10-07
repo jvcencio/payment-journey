@@ -1,6 +1,6 @@
 # MVP acceptance criteria
 
-STATUS: NOT EXECUTED. These are release gates, not claims of existing support.
+STATUS: First-slice acceptance verified in [implementation verification](first-slice-verification.md). The full-MVP gates below remain incomplete, especially non-preservation classifiers and authoritative policy.
 
 | ID | Given / when | Required outcome | Evidence |
 | --- | --- | --- | --- |

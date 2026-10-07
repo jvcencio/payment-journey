@@ -1,6 +1,6 @@
 # Architecture overview
 
-STATUS: CONCEPTUAL; no application code exists.
+STATUS: First preservation slice implemented. Adapters, canonical snapshots, lineage observations and browser UI exist. Policy evaluation and versioned rule packs in the diagram remain planned.
 
 ```mermaid
 flowchart LR

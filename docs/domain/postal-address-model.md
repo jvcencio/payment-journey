@@ -22,7 +22,7 @@ Each element retains original representation, semantic path, locator, interpreta
 | UNSTRUCTURED | Address lines without discrete components |
 | EMPTY | No populated address information |
 
-Representation mode describes an artifact's representation; it is not the address itself. **STATUS: OPEN (O-08):** exact classification of country-only content, whitespace, empty elements, and partial parser coverage. Do not equate STRUCTURED with policy conformance or infer structure from words without evidence.
+Representation mode describes an artifact's representation; it is not the address itself. For the first slice, country-only content is STRUCTURED metadata, whitespace is retained, empty values remain uninterpreted evidence, and failed parsing produces no snapshot. The [parser contract](../architecture/parser-contract.md) records these implementation boundaries. Do not equate STRUCTURED with policy conformance or infer structure from words without evidence.
 
 ## Fidelity example
 

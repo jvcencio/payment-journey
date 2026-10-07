@@ -1,6 +1,6 @@
 # Documentation index
 
-Payment Journey is at the documentation bootstrap stage. The MVP is defined but not implemented; the technical stack, license, and several support boundaries remain OPEN.
+Payment Journey has a working first preservation slice. The full MVP remains in development; policy, additional classifiers and public-release decisions remain open. The [accepted gate](architecture/implementation-gate.md) records the adopted stack and scope.
 
 Start with the [project story](../README.md), [frozen MVP](product/mvp-definition.md), [acceptance criteria](quality/acceptance-criteria.md), and [open decisions](governance/open-questions.md). Use the [stack proposal](architecture/technical-stack-proposal.md) and [implementation plan](architecture/implementation-plan.md) to review the next slice.
 
@@ -29,6 +29,9 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 
 ## Architecture
 
+- [Parser and evidence contract](architecture/parser-contract.md)
+- [Dependency review](architecture/dependency-review.md)
+
 - [Accepted implementation gate](architecture/implementation-gate.md)
 
 - [Overview](architecture/overview.md)
@@ -45,6 +48,8 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 - [Licensing boundaries](research/licensing-boundaries.md)
 
 ## Quality
+
+- [First-slice verification](quality/first-slice-verification.md)
 
 - [Test strategy](quality/test-strategy.md)
 - [Synthetic fixtures](quality/synthetic-fixtures.md)
@@ -72,6 +77,9 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 ## Resulting repository tree
 
 ```text
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── docs/
 │   ├── architecture/
 │   │   ├── adr/
@@ -82,8 +90,11 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   │   ├── 0005-participant-role-model.md
 │   │   │   └── 0006-adapter-responsibility.md
 │   │   ├── adapter-contract.md
+│   │   ├── dependency-review.md
+│   │   ├── implementation-gate.md
 │   │   ├── implementation-plan.md
 │   │   ├── overview.md
+│   │   ├── parser-contract.md
 │   │   ├── rule-pack-contract.md
 │   │   └── technical-stack-proposal.md
 │   ├── domain/
@@ -109,6 +120,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   └── success-metrics.md
 │   ├── quality/
 │   │   ├── acceptance-criteria.md
+│   │   ├── first-slice-verification.md
 │   │   ├── synthetic-fixtures.md
 │   │   └── test-strategy.md
 │   ├── research/
@@ -118,15 +130,67 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   └── standards-landscape.md
 │   └── index.md
 ├── fixtures/
+│   ├── raw-pairs/
+│   │   └── a-clean-preservation/
+│   │       ├── README.md
+│   │       ├── manifest.json
+│   │       ├── source.mt103
+│   │       └── target.pacs008.xml
 │   └── README.md
 ├── src/
+│   ├── adapters/
+│   │   ├── mt103/
+│   │   │   └── index.ts
+│   │   ├── pacs008/
+│   │   │   └── index.ts
+│   │   └── shared.ts
+│   ├── application/
+│   │   ├── browser-client.ts
+│   │   ├── evaluate.ts
+│   │   └── evaluation.worker.ts
+│   ├── artifacts/
+│   │   └── capture.ts
+│   ├── domain/
+│   │   └── model.ts
+│   ├── lineage/
+│   │   └── preservation.ts
+│   ├── ui/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── styles.css
 │   └── README.md
+├── tests/
+│   ├── adapters/
+│   │   ├── mt103.test.ts
+│   │   └── pacs008.test.ts
+│   ├── application/
+│   │   └── worker.test.ts
+│   ├── domain/
+│   │   └── evidence.test.ts
+│   ├── integration/
+│   │   └── fixture-a.test.ts
+│   ├── lineage/
+│   ├── ui/
+│   │   └── journey.spec.ts
+│   └── README.md
+├── .gitignore
+├── .npmrc
+├── .nvmrc
+├── .prettierrc.json
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── DISCLAIMER.md
 ├── LICENSE
 ├── README.md
-└── SECURITY.md
+├── SECURITY.md
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── playwright.config.ts
+├── tsconfig.json
+├── vite.config.ts
+└── vitest.config.ts
 ```
 
-`src/` contains only a documentation placeholder. The fixture scenarios are specifications, not executable payloads. No application dependencies or CI workflow are present yet.
+Fixture A is executable. Other fixture scenarios remain specifications. Policy is not implemented. Generated build, dependency and browser-test output directories are omitted above.

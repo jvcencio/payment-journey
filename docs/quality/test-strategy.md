@@ -1,6 +1,6 @@
 # Test strategy
 
-The bootstrap is documentation only. No unit tests or application CI are claimed to exist. The following strategy governs implementation.
+First-slice unit/integration tests, production-browser tests and GitHub Actions configuration now exist. Run `npm run check` and `npm run test:browser` after building. The strategy below includes later full-MVP coverage; policy and non-preservation classifiers are not implemented.
 
 ## Layers
 
