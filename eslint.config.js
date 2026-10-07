@@ -4,6 +4,29 @@ import hooks from 'eslint-plugin-react-hooks';
 import refresh from 'eslint-plugin-react-refresh';
 export default tseslint.config(
   { ignores: ['dist/**', 'node_modules/**', 'test-results/**'] },
+  {
+    files: [
+      'src/domain/**/*.ts',
+      'src/adapters/**/*.ts',
+      'src/lineage/**/*.ts',
+      'src/artifacts/**/*.ts',
+      'src/application/evaluate.ts',
+    ],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            'react',
+            'react/*',
+            'react-dom',
+            'react-dom/*',
+            '**/ui/**',
+          ],
+        },
+      ],
+    },
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
