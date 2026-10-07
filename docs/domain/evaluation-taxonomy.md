@@ -41,3 +41,5 @@ A composite address split into discrete elements can carry DERIVED + STRUCTURED;
 Known defaults require configuration evidence. An unexplained country is UNSOURCED, not automatically DEFAULTED. A target-only addition must never vanish because there is no source match. Ambiguous matches need visible uncertainty; absence of a successful match alone is insufficient proof of LOST.
 
 The brief mentions generated origins, but does not define a GENERATED event in v0.2. **STATUS: OPEN (O-09):** decide how generated values are represented without silently extending this taxonomy. Exact matching thresholds, confidence scale, conflict compatibility rules, and treatment of partial preservation are also open. See [provenance](provenance-model.md).
+
+Parser diagnostics that identify unsupported input/version are distinct from the taxonomy event UNSUPPORTED, which concerns target representational capability. An unsupported parser input does not prove a target format limitation.

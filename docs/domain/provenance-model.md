@@ -26,3 +26,7 @@ A one-to-none edge can account for confirmed loss. A none-to-one edge can accoun
 Use typed references for artifact locators, interpretation records, transformation declarations, versioned normalization maps, explicit default configuration, and external enrichment sources. For raw substrings, retain offsets or equivalent recoverable spans. JSON shape, confidence scale, stable IDs, and representation of unresolved candidate matches require decisions (O-08).
 
 The engine infers observations from evidence; it cannot recover an undocumented vendor algorithm simply by comparing endpoints. Label explanatory hypotheses accordingly. Preserve source and target evidence so judgments can be reviewed later.
+
+## Accepted first-slice serialization refinement
+
+Confidence: EXPLICIT, DETERMINISTIC, INFERRED, UNKNOWN, as defined in the [implementation gate](../architecture/implementation-gate.md). Edges may share relationshipGroupId while preserving individually inspectable component events. Pairing is explicitly user-established; no automatic transaction correlation. Lineage observations describe facts; policy findings describe separately evaluated judgments.

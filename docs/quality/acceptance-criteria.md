@@ -21,3 +21,7 @@ STATUS: NOT EXECUTED. These are release gates, not claims of existing support.
 “Material” boundaries, unsupported-result terminology, and transaction matching must be resolved before these gates can pass. Coverage is within declared support; unsupported domains remain visible, never implicitly certified.
 
 Engineering release prerequisites: typed domain models, unit/fixture tests, linting, formatting, CI, dependency review, documented setup commands, accessible UI checks, license selection, and an operational security contact. No numerical performance target is invented here; establish one before performance acceptance.
+
+## First-slice gate refinement
+
+The [accepted gate](../architecture/implementation-gate.md) authorizes lineage-only Fixture A. AC-09 external policy remains a full-MVP release requirement. AC-13 persistence/export requires a separate later decision; in-memory reproducibility is required now. Neither is a claim that the full MVP is complete when the first slice passes.

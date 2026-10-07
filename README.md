@@ -93,7 +93,7 @@ Start at the [documentation index](docs/index.md), then explore [discovery](docs
 
 | Phase | Focus | State |
 | --- | --- | --- |
-| 0 | Product definition and repository bootstrap | Documentation drafted |
+| 0 | Product definition and repository bootstrap | Bootstrap complete |
 | 1 | MT103 / pacs.008 address MVP | Planned; decisions open |
 | 2 | Rule-pack expansion | Future |
 | 3 | More participant roles | Future |

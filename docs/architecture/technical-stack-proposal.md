@@ -1,6 +1,6 @@
 # Technical stack proposal
 
-**STATUS: OPEN — recommendation for review, not an adopted stack.** No dependencies are installed and no application scaffold exists.
+**STATUS: SUPERSEDED FOR FIRST SLICE by the [accepted implementation gate](implementation-gate.md).** The original proposal and alternatives below are retained as decision history.
 
 ## Recommendation
 

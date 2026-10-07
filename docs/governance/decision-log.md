@@ -115,3 +115,14 @@ Recorded date for all bootstrap entries: 2026-10-07. Accepted entries record the
 ## Updating the log
 
 Record date, decision, status, context, rationale, alternatives and why rejected, implications, and related artifacts. Do not overwrite history when revising a decision; link a superseding record. Remaining choices are tracked in the [open register](open-questions.md).
+
+## D-011 — First implementation gate accepted
+
+- Date: 2026-10-07
+- Status: ACCEPTED BY PROJECT OWNER
+- Decision: Adopt the exact first-slice stack, browser-only execution, MT Option-F/pacs.008.001.14 pair, explicit pairing, confidence enum, materiality and component grouping.
+- Context: Architecture review accepted with explicit build authorization.
+- Rationale: Prove clean preservation without network conformance or expanded scope.
+- Alternatives: Backend, database, fuzzy correlation, inferred MT components and graph/component frameworks excluded from this slice by owner.
+- Implications: D-009 stack proposal is superseded for the first slice; policy and export/import deferred. External-authority baseline remains a full-MVP release gate.
+- Related artifact: [adopted gate](../architecture/implementation-gate.md).

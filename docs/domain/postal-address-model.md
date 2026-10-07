@@ -1,6 +1,6 @@
 # Postal address model
 
-Postal address is the first deeply implemented domain. The canonical fields are a comparison vocabulary; not every source format or profile exposes all of them.
+Postal address is the first domain planned for deep implementation. The canonical fields are a comparison vocabulary; not every source format or profile exposes all of them.
 
 ```text
 careOf                 department             subDepartment

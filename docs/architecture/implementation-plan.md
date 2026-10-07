@@ -1,6 +1,6 @@
 # MVP implementation plan
 
-STATUS: PROPOSED sequencing within the frozen MVP. No application implementation is authorized by completion of this document alone; this bootstrap stops at documentation.
+STATUS: First lineage slice authorized by the [implementation gate](implementation-gate.md). Original full-MVP sequencing below remains a roadmap; policy and persistence are deferred for this slice.
 
 | Step | Deliverable | Exit evidence / dependencies |
 | --- | --- | --- |

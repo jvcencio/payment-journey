@@ -29,6 +29,8 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 
 ## Architecture
 
+- [Accepted implementation gate](architecture/implementation-gate.md)
+
 - [Overview](architecture/overview.md)
 - [Adapter contract](architecture/adapter-contract.md)
 - [Rule pack contract](architecture/rule-pack-contract.md)
