@@ -41,7 +41,7 @@ export function parseMt103(artifact: Artifact): ParseResult {
       const start = offset + match.index;
       if (
         text.includes('\r') ||
-        /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(text)
+        Array.from(text).some((c) => c.charCodeAt(0) < 32 && c !== '\t')
       )
         throw new ParseFailure(
           'MALFORMED_MT',
