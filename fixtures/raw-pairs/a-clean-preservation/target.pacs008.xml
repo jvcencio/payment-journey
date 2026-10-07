@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- All data is fictional. Synthetic semantic fixture; no XSD or network conformance claimed. -->
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.14">
+  <FIToFICstmrCdtTrf>
+    <GrpHdr>
+      <MsgId>SYNTHETIC-A-001</MsgId>
+      <CreDtTm>2026-10-07T12:00:00Z</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <SttlmInf><SttlmMtd>CLRG</SttlmMtd></SttlmInf>
+    </GrpHdr>
+    <CdtTrfTxInf>
+      <PmtId><EndToEndId>SYNTHETIC-A-001</EndToEndId></PmtId>
+      <IntrBkSttlmAmt Ccy="USD">100.00</IntrBkSttlmAmt>
+      <ChrgBr>SHAR</ChrgBr>
+      <Dbtr>
+        <Nm>FABLE PARTS TEST</Nm>
+        <PstlAdr>
+          <TwnNm>EXAMPLE TOWN</TwnNm>
+          <Ctry>US</Ctry>
+          <AdrLine>12 FICTION LANE</AdrLine>
+          <AdrLine>TEST SUITE ALPHA</AdrLine>
+        </PstlAdr>
+      </Dbtr>
+      <DbtrAcct><Id><Othr><Id>SYNTH-DEBTOR-001</Id></Othr></Id></DbtrAcct>
+      <Cdtr>
+        <Nm>IMAGINARY SUPPLY TEST</Nm>
+        <PstlAdr>
+          <TwnNm>FABLE TOWN</TwnNm>
+          <Ctry>GB</Ctry>
+          <AdrLine>34 STORY ROAD</AdrLine>
+          <AdrLine>TEST FLOOR BETA</AdrLine>
+        </PstlAdr>
+      </Cdtr>
+      <CdtrAcct><Id><Othr><Id>SYNTH-CREDITOR-001</Id></Othr></Id></CdtrAcct>
+      <RmtInf><Ustrd>FICTIONAL TEST PAYMENT ONLY</Ustrd></RmtInf>
+    </CdtTrfTxInf>
+  </FIToFICstmrCdtTrf>
+</Document>

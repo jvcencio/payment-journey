@@ -1,0 +1,30 @@
+{
+  "fixtureId": "A",
+  "version": "0.1.0",
+  "synthetic": true,
+  "fictionalDataStatement": "Every party, account, institution, identifier and payment is fictional. Do not use for payment initiation.",
+  "source": "source.mt103",
+  "target": "target.pacs008.xml",
+  "pairing": "USER_SUPPLIED",
+  "messageSubset": "MT103 Option-F project fixture contract v1 and pacs.008.001.14",
+  "expectedMaterialNodesPerArtifact": 10,
+  "expectedPreservationEdges": 10,
+  "expectedConceptsPerRole": [
+    "name",
+    "address.townName",
+    "address.country",
+    "address.addressLines[0]",
+    "address.addressLines[1]"
+  ],
+  "forbiddenEvents": [
+    "LOST",
+    "TRUNCATED",
+    "DERIVED",
+    "COLLAPSED",
+    "MISPLACED",
+    "UNSOURCED"
+  ],
+  "policyEvaluation": "NOT_EVALUATED",
+  "networkProfileValidation": false,
+  "fullSchemaValidation": false
+}
