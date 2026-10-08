@@ -13,3 +13,8 @@ No delivery dates or external adoption promises are committed.
 | 6 — Regression / CI integration | User workflows consume stable reports | H7 validated; separate from this project's own engineering CI |
 
 Later phases are directions, not approved scope. The [implementation plan](../architecture/implementation-plan.md) covers Phase 1 only.
+
+## Discovery backlog (not implemented)
+
+- Practitioner cold-use validation of the public-alpha comprehension changes; heuristic review is not customer/market validation.
+- ABA/routing-number identification and address enrichment: review authoritative directory access, licensing/usage and redistribution before any lookup. Preserve provenance separately from payment-rule applicability. See [JTBD](personas-and-jtbd.md).

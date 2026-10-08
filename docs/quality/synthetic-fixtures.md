@@ -52,3 +52,7 @@ Golden expectations must be reviewed independently of generated engine output. E
 | J | 4 | 5 | 5 | One unsourced country |
 
 All unaffected mappings are PRESERVED and all material nodes are accounted for in these fixtures. Context declares correspondence and completeness, never expected events. Independent expected.json files are used only by tests; the application imports source, target and context. Negative tests remove completeness, conflict roles/occurrences, overlap bindings or leave values recoverable to require unresolved accounting. Fixture A remains the raw-adapter regression. See [verification](second-slice-verification.md) and [evidence boundary](../architecture/second-slice-boundary.md).
+
+## E constraint clarification (Slice 4)
+
+E models a fictional 31-character party-name display column in a target system. Its ASCII source exceeds that explicit local constraint; the existing 31-character target and omitted suffix are unchanged. The limit is synthetic, not an MT field-line, ISO element or network-standard rule. The declaration is retained in context evidence.

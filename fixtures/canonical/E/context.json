@@ -2,7 +2,7 @@
   "fixtureId": "E",
   "version": "0.2.0",
   "synthetic": true,
-  "statement": "Every party, identifier and address in this canonical test witness is fictional. Not an MT or ISO message.",
+  "statement": "Every party, identifier and address in this canonical test witness is fictional. Not an MT or ISO message. Synthetic constraint: the fictional target system allocates a 31-character display column to the party name and retains only that prefix. This ASCII example demonstrates that local display-column limit, not an MT, ISO or network-standard constraint.",
   "sourceCoverage": "COMPLETE",
   "targetCoverage": "COMPLETE",
   "originEvidence": "COMPLETE",

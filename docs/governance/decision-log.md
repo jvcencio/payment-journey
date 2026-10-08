@@ -177,3 +177,7 @@ Implemented 2026-10-07. The [third-slice report](../quality/third-slice-verifica
 - UX interpretation: Default prepared scenario is semantic misplacement. Policy selection persists independently of report lifecycle. Cross-border defaults to Don't assume for user-entered pairs unless explicitly selected; any prepared default is disclosed. No fixture-ID-based result sentences.
 - Publication: Preserve all development commits, use public jvcencio/payment-journey on main, and GitHub Pages only after audit and full checks. Stop publication for sensitive material or an unrelated remote/existing target. No tag/release authorized.
 - Discovery only: ABA/routing lookup requires separate source, usage-rights and provenance review.
+
+### D-015 implementation clarifications
+
+The prepared scenario catalogue explicitly declares cross-border example context; the initial showcase discloses that fact. Explicit user profile/applicability choices persist across scenarios. Moving to user-entered raw messages clears only an unchosen example assumption, not an explicit choice. Coverage counts distinguish interpreted source/target fields, outside-scope fields and fields with unresolved relationships. E retains its original values but now documents a fictional 31-character name display-column constraint; no standards limit is implied.

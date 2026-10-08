@@ -19,3 +19,9 @@
 | Risk / Compliance | Inspect selected policy evidence, without treating output as advice |
 
 The MVP does not create separate workflows for all these roles. Research must establish which tasks warrant dedicated support.
+
+## Future discovery — ABA / routing-number enrichment
+
+When only an ABA routing number or other financial-institution identifier is available, help the user determine which institution/address information can be authoritatively sourced, what remains missing, and what the selected payment regime requires.
+
+Identification/enrichment is distinct from rule applicability. Routing-directory usage, licensing and redistribution may be restricted; any automated lookup requires source-authority and usage-rights review first. Derived/enriched values must retain provenance. This is a discovery item only, not implemented or authorized in Slice 4.
