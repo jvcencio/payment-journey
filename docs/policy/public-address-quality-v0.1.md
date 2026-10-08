@@ -29,3 +29,5 @@ Capability evidence is an explicit finite synthetic target declaration for bundl
 ## Deferred authority
 
 Fedwire: `PENDING_FINAL_PUBLIC_GUIDELINES`. The [August 27, 2026 notice](https://www.frbservices.org/news/communications/082726-fedwire-funds-services-release-rescheduled/) moves the release to November 2027. Final public guidance must be reviewed before a separate pack is implemented. No superseded November 2026 release date is executable.
+
+The current [Fedwire release FAQ, questions 1–2](https://www.frbservices.org/resources/financial-services/wires/fedwire-services-frequently-asked-questions/november-2026-release-frequently-asked-questions/) expects final usage guidelines in November 2026 for the November 2027 release. Its URL still contains the former year; URL text is not version evidence.

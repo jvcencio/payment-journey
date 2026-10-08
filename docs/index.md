@@ -1,6 +1,6 @@
 # Documentation index
 
-Payment Journey has a working preservation and fidelity-degradation slices. The full MVP remains in development; policy, remaining classifiers and public-release decisions remain open. The [accepted gate](architecture/implementation-gate.md) records the adopted stack and scope.
+Payment Journey has a working lineage and first public address-quality policy pack. The full MVP remains in development; further policies, remaining classifiers and public-release decisions remain open. The [accepted gate](architecture/implementation-gate.md) records the adopted stack and scope.
 
 Start with the [project story](../README.md), [frozen MVP](product/mvp-definition.md), [acceptance criteria](quality/acceptance-criteria.md), and [open decisions](governance/open-questions.md). Use the [stack proposal](architecture/technical-stack-proposal.md) and [implementation plan](architecture/implementation-plan.md) to review the next slice.
 
@@ -48,8 +48,14 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 - [Standards landscape](research/standards-landscape.md)
 - [Licensing boundaries](research/licensing-boundaries.md)
 
+## Policy
+
+- [CPMI / PMPG Address Quality Baseline v0.1.0](policy/public-address-quality-v0.1.md)
+
 ## Quality
 
+- [Third-slice verification](quality/third-slice-verification.md)
+- [Policy fixtures](quality/policy-fixtures.md)
 - [Second-slice verification](quality/second-slice-verification.md)
 - [First-slice verification](quality/first-slice-verification.md)
 
@@ -121,9 +127,13 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   ├── product-thesis.md
 │   │   ├── roadmap.md
 │   │   └── success-metrics.md
+│   ├── policy/
+│   │   └── public-address-quality-v0.1.md
 │   ├── quality/
 │   │   ├── acceptance-criteria.md
 │   │   ├── first-slice-verification.md
+│   │   ├── third-slice-verification.md
+│   │   ├── policy-fixtures.md
 │   │   ├── second-slice-verification.md
 │   │   ├── synthetic-fixtures.md
 │   │   └── test-strategy.md
@@ -134,7 +144,8 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   └── standards-landscape.md
 │   └── index.md
 ├── fixtures/
-│   ├── canonical/ (C, D, E, F, J)
+│   ├── canonical/ (C, D, E, F, J, P1–P5)
+│   ├── policy/ (independent expectations and capability declaration)
 │   ├── raw-pairs/
 │   │   └── a-clean-preservation/
 │   │       ├── README.md
@@ -160,7 +171,9 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   ├── fixtures/ (canonical compiler and catalog)
 │   ├── lineage/
 │   │   └── classify.ts
+│   ├── policy/ (versioned public pack and independent evaluation)
 │   ├── ui/
+│   │   ├── PolicyPanel.tsx
 │   │   ├── Report.tsx
 │   │   ├── App.tsx
 │   │   ├── main.tsx
@@ -200,4 +213,4 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 └── vitest.config.ts
 ```
 
-Fixture A and canonical C/D/E/F/J are executable. Other headline fixture scenarios remain specifications. Policy is not implemented. Generated build, dependency and browser-test output directories are omitted above.
+Fixture A and canonical C/D/E/F/J/P1–P5 are executable. Other headline fixture scenarios remain specifications. The public address-quality policy pack is implemented; network conformance is not. Generated build, dependency and browser-test output directories are omitted above.

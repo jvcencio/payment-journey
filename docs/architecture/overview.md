@@ -1,6 +1,6 @@
 # Architecture overview
 
-STATUS: Preservation and fidelity-degradation slices implemented. Adapters, canonical snapshots, lineage observations and browser UI exist. Policy evaluation and versioned rule packs in the diagram remain planned.
+STATUS: Preservation and fidelity-degradation slices implemented. Adapters, canonical snapshots, lineage observations and browser UI exist. A first versioned public address-quality pack evaluates immutable lineage separately; network/institution profiles remain planned.
 
 ```mermaid
 flowchart LR

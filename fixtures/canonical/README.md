@@ -5,3 +5,5 @@ C, D, E, F and J are canonical-engine fixtures, not new payment formats or MT-de
 C joins known address components into an address line. D joins them into StreetName and selectively misplaces building/room. E truncates a name with a verified prefix relationship. F removes room with complete target evidence. J adds country CA with complete source/origin evidence and no explaining origin.
 
 `expected.json` files are independent test oracles. The application imports only source, target and context; never expected events. JSONL files are retained verbatim with per-record locators. No arbitrary canonical input/import UI is supported.
+
+P1–P5 extend the same evidence reader with unchanged structured/hybrid pairs for policy tests. They add no payment format or role. See [policy fixtures](../../docs/quality/policy-fixtures.md); expected policy results are separate from lineage facts.

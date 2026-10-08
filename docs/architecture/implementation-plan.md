@@ -1,6 +1,6 @@
 # MVP implementation plan
 
-STATUS: First lineage slice authorized by the [implementation gate](implementation-gate.md). Original full-MVP sequencing below remains a roadmap; policy and persistence are deferred for this slice.
+STATUS: First lineage slice authorized by the [implementation gate](implementation-gate.md). Subsequent authorized slices implemented degradation and the first public address-quality policy pack (D-013/D-014). Original full-MVP sequencing below remains a roadmap; persistence is deferred.
 
 | Step | Deliverable | Exit evidence / dependencies |
 | --- | --- | --- |

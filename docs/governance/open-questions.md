@@ -1,6 +1,6 @@
 # Open questions
 
-This historical register is refined by the accepted [implementation gate](../architecture/implementation-gate.md). O-02 is RESOLVED for the first slice; O-03/O-04/O-05/O-06/O-08 are RESOLVED for the explicitly adopted subset and contracts, with broader items still OPEN. O-07 policy and export/import are deferred. No default acceptance is implied for remaining questions. “Project owner” is a responsibility label; no unprovided person or organization has been assigned.
+This historical register is refined by the accepted [implementation gate](../architecture/implementation-gate.md). O-02 is RESOLVED for the first slice; O-03/O-04/O-05/O-06/O-08 are RESOLVED for the explicitly adopted subset and contracts, with broader items still OPEN. O-07 is resolved for the first public address-quality pack under D-014; multi-pack precedence and export/import remain deferred. No default acceptance is implied for remaining questions. “Project owner” is a responsibility label; no unprovided person or organization has been assigned.
 
 | ID | Decision | Why it matters / recommendation where available | Resolve before |
 | --- | --- | --- | --- |
@@ -28,3 +28,7 @@ Resolve only what the next implementation slice needs; do not force future multi
 - O-06: browser-only, memory-only, no payload egress; host remains open, export/import deferred.
 - O-08: named confidence enum, material name/address scope, role/concept/occurrence correspondence, optional relationshipGroupId. Ambiguous comparisons remain explicit.
 - O-01/O-09/O-10/O-11/O-12 remain open as applicable. O-07 external-authority source review is still required before full MVP release.
+
+## Third-slice resolution
+
+O-07 now has six reviewed public CPMI/PMPG predicates, exact version/source metadata, explicit applicability, alignment outcomes and separately unassigned severity. [D-014](decision-log.md) and the [pack review](../policy/public-address-quality-v0.1.md) supersede the first-slice deferral only for this scope. Broader profiles, conflicts, aggregation and persistent replay remain open.

@@ -1,6 +1,6 @@
 # Payment Journey
 
-**Status: preservation and fidelity-degradation slices implemented · full MVP in development**
+**Status: lineage and first public address-quality policy pack implemented · full MVP in development**
 
 Trace what happens to payment data as it moves between formats—and identify where meaning is preserved, transformed, degraded, or lost.
 
@@ -13,15 +13,13 @@ Message validation asks whether an artifact follows a syntax or profile. Payment
 Payment Journey compares evidence from an explicitly paired synthetic MT103 subset and pacs.008.001.14:
 
 ```text
-MT103
-   ↓
-Canonical Snapshot
-   ↓
-Semantic Lineage
-   ↑
-Canonical Snapshot
-   ↑
-pacs.008
+MESSAGE A + MESSAGE B
+         ↓
+      LINEAGE
+   What changed?
+         ↓
+   POLICY PROFILE
+What does the selected authority say?
 ```
 
 The engine identifies preservation, collapse, misplacement, truncation, loss and unsourced additions. Fixture A uses the supported raw payment pair; bundled canonical witnesses C/D/E/F/J supply explicit evidence for degradation. Raw non-matches remain unresolved without sufficient evidence. Events compose: information can survive while its structure degrades.
@@ -45,7 +43,16 @@ Room = STE 900
 | StreetName | PRESERVED, COLLAPSED |
 | Room | PRESERVED, COLLAPSED, MISPLACED |
 
-The three relationships share one group and target value, with separate component evidence. The building number and room survive inside the wrong semantic element. This canonical witness does not imply MT103 supplies discrete fields. The engine reports observations; policy evaluation remains planned.
+The three relationships share one group and target value, with separate component evidence. The building number and room survive inside the wrong semantic element. This canonical witness does not imply MT103 supplies discrete fields. The engine reports facts independently of the selected CPMI / PMPG Address Quality Baseline v0.1.0. With cross-border applicability selected, D’s debtor shows:
+
+| Dimension | Result |
+| --- | --- |
+| CPMI minimum country/town | ALIGNS |
+| CPMI preserve available structure | PARTIALLY ALIGNS, with explicit target capability evidence |
+| PMPG structured-element integrity | DOES NOT ALIGN |
+| Network conformance / institution policy | NOT EVALUATED |
+
+These are participant-specific results, not a payment-wide pass. D’s creditor lacks town and does not align with the minimum. Inspect any finding for its rule, source edition, section, authority and affected lineage evidence. Choosing **Lineage only** leaves the same facts unchanged.
 
 ## Core principles
 
@@ -59,11 +66,11 @@ The three relationships share one group and target value, with separate componen
 
 ## MVP scope
 
-**Implemented:** browser-local Fixture A through the block-4-only MT103 Option-F and single-transaction pacs.008.001.14 adapters; React-independent canonical snapshots; six composable events; grouped component relationships; raw locators and evidence; omitted suffixes; directional loss/origin observations; explicit unknown/unresolved coverage. Fixture A preserves ten relationships. Bundled canonical fixtures C/D/E/F/J demonstrate degradation with explicit correspondence and complete finite evidence where absence is asserted. No discrete MT address structure is inferred.
+**Implemented:** browser-local Fixture A through the block-4-only MT103 Option-F and single-transaction pacs.008.001.14 adapters; React-independent canonical snapshots; six composable events; grouped component relationships; raw locators and evidence; omitted suffixes; directional loss/origin observations; explicit unknown/unresolved coverage. Fixture A preserves ten relationships. Bundled canonical fixtures C/D/E/F/J demonstrate degradation with explicit correspondence and complete finite evidence where absence is asserted. No discrete MT address structure is inferred. The first public pack adds six versioned CPMI/PMPG address-quality rules and separate inspectable policy findings. P1–P5 cover structured and hybrid policy scenarios.
 
-**Roadmap:** normalization, structuring, derivation, alteration, duplication, conflicts and other taxonomy classifiers; broader address interpretation; policy evaluation and a versioned authoritative public baseline pack following separate evidence review.
+**Roadmap:** normalization, structuring, derivation, alteration, duplication, conflicts and other taxonomy classifiers; broader address interpretation; further separately reviewed public packs and network profiles.
 
-**Not implemented:** policy evaluation, full MT/XSD validation, network-profile conformance, export/import, a backend, or a database. Payloads stay in browser memory during analysis. See [parser boundaries](docs/architecture/parser-contract.md), [MVP definition](docs/product/mvp-definition.md), and [non-goals](docs/product/non-goals.md).
+**Not implemented:** full MT/XSD validation, network-specific compliance, export/import, a backend, or a database. Payloads stay in browser memory during analysis. See [parser boundaries](docs/architecture/parser-contract.md), [MVP definition](docs/product/mvp-definition.md), and [non-goals](docs/product/non-goals.md).
 
 ### Run the fictional demo
 
@@ -75,7 +82,7 @@ npm run build
 npm run preview
 ```
 
-Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded. Choose **Fixture D** in the demonstration selector to inspect collapse and selective misplacement, or C/E/F/J for the other cases. All parties, accounts, identifiers, institutions and payments are fictional. No secrets or credentials are needed.
+Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded. Choose **Fixture D** in the demonstration selector to inspect collapse and selective misplacement, or C/E/F/J for the other cases. Then choose **CPMI / PMPG Address Quality Baseline v0.1.0** under Evaluation Profile and explicitly select **Evaluate as cross-border** to assess CPMI applicability. The default is Lineage only; profile changes reuse the established report. All parties, accounts, identifiers, institutions and payments are fictional. No secrets or credentials are needed.
 
 ```sh
 npm run check
@@ -107,11 +114,11 @@ A payment is not a message. Each artifact is evidence from one stage; its canoni
 
 ## Rule packs
 
-Lineage answers “what happened?” Policy answers “is it acceptable under this selected regime?” Future profiles may combine public semantic rules, network requirements, market practice, institution policies, and vendor baselines. Vendor behavior does not establish what should happen. Saved evaluations must retain the exact rule versions used.
+Lineage answers “what happened?” Policy answers “is it acceptable under this selected regime?” The implemented public-address-quality@0.1.0 pack separates **CPMI harmonisation guidance** from **PMPG market practice**. It uses alignment outcomes rather than regulatory pass/fail. CPMI encourages adoption; these harmonisation requirements are not themselves regulation. Future profiles may add network requirements, institution policies and vendor baselines. Vendor behavior does not establish what should happen. Saved evaluations must retain the exact rule versions used.
 
-No network conformance is claimed today. [Policy model](docs/domain/policy-engine.md) · [Redistribution boundaries](docs/research/licensing-boundaries.md).
+Network-specific compliance is not implemented. No Fedwire, CBPR+ or ISO certification is claimed. Fedwire is **PENDING_FINAL_PUBLIC_GUIDELINES**, following the November 2027 release deferral. [Public pack sources and interpretation](docs/policy/public-address-quality-v0.1.md). [Policy model](docs/domain/policy-engine.md) · [Redistribution boundaries](docs/research/licensing-boundaries.md).
 
-Verification: [second-slice results and limitations](docs/quality/second-slice-verification.md).
+Verification: [third-slice results and limitations](docs/quality/third-slice-verification.md) · [historical second-slice results](docs/quality/second-slice-verification.md).
 
 ## Documentation
 
@@ -122,7 +129,7 @@ Start at the [documentation index](docs/index.md), then explore [discovery](docs
 | Phase | Focus | State |
 | --- | --- | --- |
 | 0 | Product definition and repository bootstrap | Bootstrap complete |
-| 1 | MT103 / pacs.008 address MVP | Preservation and degradation slices implemented |
+| 1 | MT103 / pacs.008 address MVP | Lineage and first public policy pack implemented |
 | 2 | Rule-pack expansion | Future |
 | 3 | More participant roles | Future |
 | 4 | More message families | Future |

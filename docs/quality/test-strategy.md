@@ -1,6 +1,6 @@
 # Test strategy
 
-First-slice unit/integration tests, production-browser tests and GitHub Actions configuration now exist. Run `npm run check` and `npm run test:browser` after building. The strategy below includes later full-MVP coverage; policy and non-preservation classifiers are not implemented.
+Lineage and policy unit/integration tests, production-browser tests and GitHub Actions configuration now exist. Run `npm run check` and `npm run test:browser` after building. The strategy below includes later full-MVP coverage; six lineage events and six public address-quality policy rules are implemented; broader taxonomy/profile coverage remains planned.
 
 ## Layers
 
