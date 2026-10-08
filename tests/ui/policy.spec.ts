@@ -1,7 +1,7 @@
 import { openAuthority } from './helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function selectPolicy(page: Page, id: string) {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption(id);
   await page.getByRole('button', { name: 'Compare these messages' }).click();
   await page
@@ -69,7 +69,7 @@ test('profile changes do not send parsing requests, mutate lineage presentation 
       original.call(this, message);
     };
   });
-  await page.goto('/');
+  await page.goto('./');
   await expect(
     page.getByRole('button', { name: 'Compare these messages' }),
   ).toBeEnabled();

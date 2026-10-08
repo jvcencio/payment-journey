@@ -13,7 +13,7 @@ const target = readFileSync(
 test('Fixture A shows canonical participants and inspectable evidence', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   const evaluate = page.getByRole('button', { name: 'Compare these messages' });
   await expect(evaluate).toBeEnabled();
@@ -59,7 +59,7 @@ test('evaluation sends no network requests, including payload-bearing requests',
   page,
   context,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await expect(
     page.getByRole('button', { name: 'Compare these messages' }),
@@ -90,7 +90,7 @@ test('evaluation sends no network requests, including payload-bearing requests',
 });
 
 test('raw XML renders as inert text without injection', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await expect(
     page.getByRole('button', { name: 'Compare these messages' }),
@@ -120,7 +120,7 @@ test('raw XML renders as inert text without injection', async ({ page }) => {
 test('wrong version, hostile XML and multiple transactions show explicit diagnostics', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   const input = page.getByRole('textbox', {
     name: 'Target message',
@@ -151,7 +151,7 @@ test('keyboard inspection and narrow screen layout remain usable', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   const evaluate = page.getByRole('button', { name: 'Compare these messages' });
   await expect(evaluate).toBeEnabled();
@@ -175,7 +175,7 @@ test('keyboard inspection and narrow screen layout remain usable', async ({
 test('Fixture D explains shared text and selective component misplacement', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await page
     .getByRole('combobox', { name: 'Example scenario' })
@@ -236,7 +236,7 @@ for (const [fixtureId, concept, event, absence] of [
   test(`Fixture ${fixtureId} exposes directional ${event} evidence`, async ({
     page,
   }) => {
-    await page.goto('/');
+    await page.goto('./');
     await page.getByLabel('Example scenario').selectOption('A');
     await page
       .getByRole('combobox', { name: 'Example scenario' })
@@ -257,7 +257,7 @@ for (const [fixtureId, concept, event, absence] of [
 test('Fixture E exposes the omitted suffix and decoded offsets', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await page
     .getByRole('combobox', { name: 'Example scenario' })
@@ -275,7 +275,7 @@ test('Fixture E exposes the omitted suffix and decoded offsets', async ({
 test('Fixture C preserves concepts in a broad address line without misplacement', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await page
     .getByRole('combobox', { name: 'Example scenario' })
@@ -291,7 +291,7 @@ test('all canonical evaluations remain browser-local', async ({
   page,
   context,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await expect(
     page.getByRole('button', { name: 'Compare these messages' }),
@@ -317,7 +317,7 @@ test('all canonical evaluations remain browser-local', async ({
 test('unresolved raw coverage is visibly different from complete accounting', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('./');
   await page.getByLabel('Example scenario').selectOption('A');
   await page
     .getByRole('textbox', { name: 'Target message', exact: true })
