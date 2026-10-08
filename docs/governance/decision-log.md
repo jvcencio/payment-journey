@@ -152,3 +152,14 @@ Record date, decision, status, context, rationale, alternatives and why rejected
 ### D-013 implementation evidence
 
 Completed 2026-10-07 within the authorized boundary. Prefix truncation is limited to names/address lines; completeness is asserted only for finite canonical witnesses. Missing evidence, unknown interpretation, role/occurrence conflicts and recoverable alternatives remain unresolved. No historical ADR rationale was changed. [Second-slice verification](../quality/second-slice-verification.md) records 65 unit/integration and 12 browser tests passing.
+
+## D-014 — Evidence-backed address policy authorized
+
+- Date: 2026-10-07
+- Status: AUTHORIZED BY PROJECT OWNER; sources retrieved and relevant sections reviewed.
+- Decision: Add public-address-quality@0.1.0 using CPMI Requirement 11 (2026 updated report) and PMPG Hybrid Postal Address v1.14, retaining separate authority classes and five alignment outcomes.
+- Rationale: Demonstrate independent policy judgments without changing factual lineage. Target feasibility needs independent capability evidence; canonical vocabulary alone is insufficient.
+- Interpretation: Cross-border scope is explicitly selected. Hybrid denotes an observed mixture, even if a mandatory component is missing. Exact delimited repetition is the narrow duplication test; no match remains UNKNOWN. Code-point length is a documented project convention. Source strength does not determine severity.
+- Alternatives excluded: universal pass/fail, inferred feasibility, fuzzy matching, external runtime lookups, and new lineage classifiers.
+- Fedwire: PENDING_FINAL_PUBLIC_GUIDELINES following the November 2027 release deferral. Different update schedules on authoritative pages require version/status provenance, not URL-only authority.
+- Related artifact: [pack review](../policy/public-address-quality-v0.1.md). Historical ADRs remain unchanged.
