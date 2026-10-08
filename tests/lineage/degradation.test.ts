@@ -83,4 +83,60 @@ describe('evidence-bound degradation', () => {
     expect(g.lineageEdges.some((e) => e.relationshipGroupId)).toBe(false);
     expect(g.unresolved.some((u) => u.side === 'SOURCE')).toBe(true);
   });
+  it('exposes the exact missing name suffix with value offsets', async () => {
+    const { run } = await example('E');
+    const e = run().lineageEdges.find((e) =>
+      e.taxonomyEvents.some((t) => t.type === 'TRUNCATED'),
+    )!;
+    expect(e.missingPortion).toEqual({
+      text: 'INGS LLC',
+      start: 31,
+      end: 39,
+      coordinate: 'SOURCE_VALUE_UTF16',
+    });
+    expect(run().unresolved).toEqual([]);
+  });
+  it('does not label whitespace normalization as truncation', async () => {
+    const { w, run } = await example('E');
+    const s = w.source.snapshot.nodes.find(
+      (n) => n.role === 'DEBTOR' && n.semanticPath === 'name',
+    )!;
+    const t = w.target.snapshot.nodes.find(
+      (n) => n.role === 'DEBTOR' && n.semanticPath === 'name',
+    )!;
+    s.value = 'FABLE ';
+    t.value = 'FABLE';
+    expect(
+      run().lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'TRUNCATED'),
+      ),
+    ).toBe(false);
+    expect(run().unresolved).toHaveLength(2);
+  });
+  it('finds total loss only with complete target evidence', async () => {
+    const { w, run } = await example('F');
+    const e = run().lineageEdges.find((e) =>
+      e.taxonomyEvents.some((t) => t.type === 'LOST'),
+    )!;
+    expect(e.targetElementIds).toEqual([]);
+    expect(e.sourceElementIds).toHaveLength(1);
+    expect(e.evidenceRefs).toContain(w.context.evidence[0]!.evidenceId);
+    w.context.targetComplete = false;
+    expect(
+      run().lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'LOST'),
+      ),
+    ).toBe(false);
+    expect(run().unresolved).toHaveLength(1);
+  });
+  it('does not report loss when text is recoverable in a supported weaker field', async () => {
+    const { w, run } = await example('D');
+    w.context.bindings = [];
+    expect(
+      run().lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'LOST'),
+      ),
+    ).toBe(false);
+    expect(run().unresolved.length).toBeGreaterThan(0);
+  });
 });

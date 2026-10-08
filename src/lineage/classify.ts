@@ -130,6 +130,43 @@ export function classify(
       }
       explained = true;
     }
+    if (valid && t && binding.kind === 'PREFIX' && ss.length === 1) {
+      const original = ss[0]!;
+      const omitted = original.value.slice(t.value.length);
+      const supportedConcept =
+        original.semanticPath === 'name' ||
+        original.semanticPath === 'address.addressLines';
+      if (
+        supportedConcept &&
+        original.semanticPath === t.semanticPath &&
+        original.occurrence === t.occurrence &&
+        t.value.trim().length > 0 &&
+        original.value.startsWith(t.value) &&
+        omitted.trim().length > 0 &&
+        !/[\uD800-\uDBFF]$/.test(t.value)
+      ) {
+        add(
+          [original],
+          [t],
+          [{ type: 'TRUNCATED' }],
+          'The declared prefix operation retains only the initial part of this occurrence; the omitted substring is shown explicitly.',
+          {
+            evidenceRefs: [
+              ...original.evidenceRefs,
+              ...t.evidenceRefs,
+              ...binding.evidenceRefs,
+            ],
+            missingPortion: {
+              text: omitted,
+              start: t.value.length,
+              end: original.value.length,
+              coordinate: 'SOURCE_VALUE_UTF16',
+            },
+          },
+        );
+        explained = true;
+      }
+    }
     if (!explained)
       for (const id of ids)
         blocked.set(
@@ -163,7 +200,53 @@ export function classify(
         'Exact value at the corresponding role, semantic concept and occurrence.',
       );
   }
-  // Absence classification is intentionally added only with complete evidence.
+  // Closed-world judgments are limited to declared complete synthetic evidence.
+  const verifiedContext =
+    !!context &&
+    context.evidence.length > 0 &&
+    context.evidence.every((e) => {
+      const artifact = context.artifacts.find(
+        (a) => a.artifactId === e.artifactId,
+      );
+      return (
+        !!artifact &&
+        e.rawValue === artifact.rawPayload.slice(e.locator.start, e.locator.end)
+      );
+    });
+  const possibleCounterparts = (n: SemanticNode, others: SemanticNode[]) =>
+    others.filter(
+      (other) =>
+        other.role === n.role &&
+        (other.semanticPath === n.semanticPath ||
+          (n.value.length > 0 && other.value.includes(n.value)) ||
+          (other.value.length > 0 && n.value.includes(other.value)) ||
+          // Composite text may encode an unsupported normalization or interpretation.
+          (n.semanticPath.startsWith('address.') &&
+            other.semanticPath === 'address.addressLines')),
+    );
+  if (verifiedContext && context?.targetComplete && context.originComplete) {
+    for (const s of sources)
+      if (
+        !usedSource.has(s.elementId) &&
+        !blocked.has(s.elementId) &&
+        participant(source, s) !== undefined &&
+        possibleCounterparts(s, targets).length === 0
+      ) {
+        add(
+          [s],
+          [],
+          [{ type: 'LOST' }],
+          'No supported target representation was found in the complete declared fixture scope. No supported alternative correspondence or transformation explains survival.',
+          {
+            evidenceRefs: [
+              ...s.evidenceRefs,
+              ...context.evidence.map((e) => e.evidenceId),
+            ],
+          },
+        );
+      }
+  }
+
   for (const [side, values, used] of [
     ['SOURCE', sources, usedSource],
     ['TARGET', targets, usedTarget],
