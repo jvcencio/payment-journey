@@ -113,3 +113,36 @@ it('does not force alignment with incomplete line coverage or unknown interpreta
     'UNKNOWN',
   );
 });
+
+it('country absence is distinct from country supplied only in AddressLine', async () => {
+  const r = await modifiedPolicyReport('P2', (records) => {
+    records.splice(
+      records.findIndex((r) => r.concept === 'address.country'),
+      1,
+    );
+    records.find((r) => r.concept === 'address.addressLines')!.value =
+      '1200 BRICKELL AVE, US';
+  });
+  for (const rule of ['CPMI-ADDR-001', 'PMPG-HYBRID-001'])
+    expect(outcomes(r).find((f) => f.ruleId === rule)!.outcome).toBe(
+      'DOES_NOT_ALIGN',
+    );
+});
+it('does not borrow a matching town from a different participant', async () => {
+  const r = await modifiedPolicyReport('P2', (records) => {
+    records.find((r) => r.concept === 'address.townName')!.value = 'LONDON';
+    records.find((r) => r.concept === 'address.addressLines')!.value =
+      '1200 BRICKELL AVE, MIAMI';
+    records.push({
+      role: 'CREDITOR',
+      concept: 'address.townName',
+      occurrence: 0,
+      value: 'MIAMI',
+    });
+  });
+  expect(
+    outcomes(r).find(
+      (f) => f.role === 'DEBTOR' && f.ruleId === 'PMPG-HYBRID-003',
+    )!.outcome,
+  ).toBe('UNKNOWN');
+});

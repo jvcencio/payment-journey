@@ -52,7 +52,7 @@ export async function evaluate(input: unknown): Promise<EvaluationResult> {
             fixtureId: witness.fixtureId,
             kind: 'CANONICAL_WITNESS',
             description:
-              'Explicit synthetic canonical evidence. Not extracted from MT103; no new payment adapter or policy evaluation.',
+              'Explicit synthetic canonical evidence. Not extracted from MT103; no new payment adapter. Policy is evaluated separately.',
           },
         },
       };

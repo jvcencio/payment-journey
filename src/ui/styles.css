@@ -638,3 +638,116 @@ select:focus-visible {
     text-align: right;
   }
 }
+
+.policy-panel {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  border: 1px solid #bccac6;
+  border-radius: 16px;
+  background: #f3f6f2;
+}
+.policy-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.policy-controls label {
+  display: grid;
+  gap: 0.5rem;
+  flex: 1 1 250px;
+  min-width: 0;
+}
+.policy-controls select {
+  max-width: 100%;
+  width: 100%;
+  padding: 0.8rem;
+  font: inherit;
+  background: white;
+  border: 1px solid #8caaa0;
+  border-radius: 6px;
+}
+.policy-findings {
+  display: grid;
+  gap: 1rem;
+}
+.policy-finding {
+  background: white;
+  padding: 1rem 1.2rem;
+  border: 1px solid #ccd6d1;
+  border-left: 4px solid #708a80;
+  border-radius: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.policy-finding[data-outcome='DOES_NOT_ALIGN'] {
+  border-left-color: #a64b39;
+}
+.policy-finding[data-outcome='PARTIALLY_ALIGNS'] {
+  border-left-color: #9e791f;
+}
+.finding-heading {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+.outcome {
+  letter-spacing: 0.04em;
+}
+.policy-metadata {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(0, 3fr);
+  gap: 0.7rem 1rem;
+}
+.policy-metadata dt {
+  font-weight: 600;
+}
+.policy-metadata dd {
+  margin: 0;
+}
+.policy-trace {
+  display: block;
+  margin: 0.5rem 0;
+  white-space: normal;
+  text-align: left;
+}
+.policy-finding h4 {
+  margin: 0.8rem 0;
+  font-size: 1.1rem;
+}
+.policy-finding h5 {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+@media (max-width: 600px) {
+  .policy-panel {
+    padding: 1rem;
+  }
+  .policy-metadata {
+    display: block;
+  }
+  .policy-metadata dd {
+    margin: 0.3rem 0 1rem;
+  }
+}
+.policy-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.policy-comparison > div {
+  padding: 1rem;
+  border: 1px solid #ccd6d1;
+  border-radius: 8px;
+  background: #fff;
+}
+.policy-comparison dl > div {
+  margin: 0.8rem 0;
+}
+.policy-comparison dd {
+  margin: 0.3rem 0;
+  font-weight: 700;
+}

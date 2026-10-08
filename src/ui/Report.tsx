@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { PolicyPanel } from './PolicyPanel';
 import type {
   LineageEdge,
   LineageReport,
@@ -140,8 +141,9 @@ export function Report({ report }: { report: LineageReport }) {
           <p className="eyebrow">02 / OBSERVE</p>
           <h2 id="report-title">The payment, side by side.</h2>
           <p>
-            Lineage observations explain what happened. Policy findings would
-            judge acceptability; policy is not evaluated.
+            Lineage observations explain what happened. The separate policy
+            evaluation below assesses selected guidance without changing these
+            facts.
           </p>
         </div>
         <div className="counts">
@@ -272,7 +274,12 @@ export function Report({ report }: { report: LineageReport }) {
             </section>
           ))}
         </section>
-        <aside className="evidence" aria-label="Selected observation evidence">
+        <aside
+          id="selected-evidence"
+          tabIndex={-1}
+          className="evidence"
+          aria-label="Selected observation evidence"
+        >
           <p className="eyebrow">03 / TRACE</p>
           <h2>Follow the evidence</h2>
           {selected ? (
@@ -419,6 +426,13 @@ export function Report({ report }: { report: LineageReport }) {
           </ul>
         </section>
       )}
+      <PolicyPanel
+        report={report}
+        onInspect={(id) => {
+          setSelected(report.graph.lineageEdges.find((e) => e.edgeId === id));
+          document.getElementById('selected-evidence')?.focus();
+        }}
+      />
       <section aria-labelledby="coverage-title">
         <p className="eyebrow">04 / UNDERSTAND THE LIMITS</p>
         <h2 id="coverage-title">Coverage stays visible.</h2>

@@ -69,7 +69,7 @@ export function App() {
           </span>
           Payment Journey
         </a>
-        <span className="version">FIDELITY DEGRADATION / 0.2</span>
+        <span className="version">EVIDENCE-BACKED POLICY / 0.3</span>
       </header>
       <main id="main">
         <section className="hero">
@@ -123,6 +123,17 @@ export function App() {
               <option value="J">
                 J — Unsourced value · canonical evidence
               </option>
+              <option value="P1">
+                P1 — Structured address · policy witness
+              </option>
+              <option value="P2">P2 — Valid hybrid · policy witness</option>
+              <option value="P3">
+                P3 — Hybrid missing town · policy witness
+              </option>
+              <option value="P4">
+                P4 — Excess hybrid lines · policy witness
+              </option>
+              <option value="P5">P5 — Repeated town · policy witness</option>
             </select>
           </label>
           {fixtureId !== 'A' && (
@@ -178,7 +189,7 @@ export function App() {
               <span className="small">
                 {fixtureId === 'A'
                   ? 'Exact namespace · one transaction'
-                  : 'Complete declared synthetic scope; no policy evaluation'}
+                  : 'Complete declared synthetic evidence scope'}
               </span>
             </label>
           </div>
@@ -240,8 +251,8 @@ export function App() {
       </main>
       <footer>
         Standards-analysis and engineering support. Not legal or regulatory
-        advice. No full XSD, MT, CBPR+ or Fedwire validation. Policy evaluation
-        and export/import are not implemented.
+        advice. Public address-quality alignment only. No full XSD, MT, CBPR+ or
+        Fedwire validation or certification. Export/import is not implemented.
       </footer>
     </>
   );
