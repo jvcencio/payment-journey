@@ -1,6 +1,6 @@
 # Documentation index
 
-Payment Journey has a working first preservation slice. The full MVP remains in development; policy, additional classifiers and public-release decisions remain open. The [accepted gate](architecture/implementation-gate.md) records the adopted stack and scope.
+Payment Journey has a working preservation and fidelity-degradation slices. The full MVP remains in development; policy, remaining classifiers and public-release decisions remain open. The [accepted gate](architecture/implementation-gate.md) records the adopted stack and scope.
 
 Start with the [project story](../README.md), [frozen MVP](product/mvp-definition.md), [acceptance criteria](quality/acceptance-criteria.md), and [open decisions](governance/open-questions.md). Use the [stack proposal](architecture/technical-stack-proposal.md) and [implementation plan](architecture/implementation-plan.md) to review the next slice.
 
@@ -29,6 +29,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 
 ## Architecture
 
+- [Second-slice boundary](architecture/second-slice-boundary.md)
 - [Parser and evidence contract](architecture/parser-contract.md)
 - [Dependency review](architecture/dependency-review.md)
 
@@ -49,6 +50,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 
 ## Quality
 
+- [Second-slice verification](quality/second-slice-verification.md)
 - [First-slice verification](quality/first-slice-verification.md)
 
 - [Test strategy](quality/test-strategy.md)
@@ -95,6 +97,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   ├── implementation-plan.md
 │   │   ├── overview.md
 │   │   ├── parser-contract.md
+│   │   ├── second-slice-boundary.md
 │   │   ├── rule-pack-contract.md
 │   │   └── technical-stack-proposal.md
 │   ├── domain/
@@ -121,6 +124,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   ├── quality/
 │   │   ├── acceptance-criteria.md
 │   │   ├── first-slice-verification.md
+│   │   ├── second-slice-verification.md
 │   │   ├── synthetic-fixtures.md
 │   │   └── test-strategy.md
 │   ├── research/
@@ -130,6 +134,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   └── standards-landscape.md
 │   └── index.md
 ├── fixtures/
+│   ├── canonical/ (C, D, E, F, J)
 │   ├── raw-pairs/
 │   │   └── a-clean-preservation/
 │   │       ├── README.md
@@ -152,9 +157,11 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   │   └── capture.ts
 │   ├── domain/
 │   │   └── model.ts
+│   ├── fixtures/ (canonical compiler and catalog)
 │   ├── lineage/
-│   │   └── preservation.ts
+│   │   └── classify.ts
 │   ├── ui/
+│   │   ├── Report.tsx
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── styles.css
@@ -193,4 +200,4 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 └── vitest.config.ts
 ```
 
-Fixture A is executable. Other fixture scenarios remain specifications. Policy is not implemented. Generated build, dependency and browser-test output directories are omitted above.
+Fixture A and canonical C/D/E/F/J are executable. Other headline fixture scenarios remain specifications. Policy is not implemented. Generated build, dependency and browser-test output directories are omitted above.

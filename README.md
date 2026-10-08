@@ -1,6 +1,6 @@
 # Payment Journey
 
-**Status: first preservation slice implemented · full MVP in development**
+**Status: preservation and fidelity-degradation slices implemented · full MVP in development**
 
 Trace what happens to payment data as it moves between formats—and identify where meaning is preserved, transformed, degraded, or lost.
 
@@ -24,11 +24,11 @@ Canonical Snapshot
 pacs.008
 ```
 
-The first slice identifies exact preservation and exposes unresolved comparisons. The broader taxonomy supports normalization, structuring, derivation, collapse, misplacement, truncation, loss, and unexplained additions; those classifiers remain planned. Events compose: information can survive while its structure degrades.
+The engine identifies preservation, collapse, misplacement, truncation, loss and unsourced additions. Fixture A uses the supported raw payment pair; bundled canonical witnesses C/D/E/F/J supply explicit evidence for degradation. Raw non-matches remain unresolved without sufficient evidence. Events compose: information can survive while its structure degrades.
 
 ## Example finding
 
-Fictional semantic test data, not a real party or transaction:
+Implemented Fixture D, selectable in the demo after Fixture A. These are fictional canonical evidence records, not a real party or transaction:
 
 ```text
 Source                          Target
@@ -39,7 +39,13 @@ Room = STE 900
 
 **Information: preserved. Structure: collapsed. Placement: partially misplaced.**
 
-The building number and room still appear, but inside a street-name element. A character comparison could miss this degradation. The lineage engine records what happened; a separately selected policy decides whether to warn or fail. This structured-source example is a canonical-model test, not a claim that MT103 supplies these discrete fields.
+| Source concept | Implemented events |
+| --- | --- |
+| BuildingNumber | PRESERVED, COLLAPSED, MISPLACED |
+| StreetName | PRESERVED, COLLAPSED |
+| Room | PRESERVED, COLLAPSED, MISPLACED |
+
+The three relationships share one group and target value, with separate component evidence. The building number and room survive inside the wrong semantic element. This canonical witness does not imply MT103 supplies discrete fields. The engine reports observations; policy evaluation remains planned.
 
 ## Core principles
 
@@ -53,9 +59,9 @@ The building number and room still appear, but inside a street-name element. A c
 
 ## MVP scope
 
-**Available now:** browser-only Fixture A, a block-4-only MT103 Option-F adapter, a pacs.008.001.14 adapter accepting exactly one transaction, React-independent canonical snapshots, exact-preservation lineage, and an accessible evidence/coverage UI. Ten material relationships are preserved in the demo. Unknown fields stay visible. Non-matching elements remain explicitly unresolved rather than being guessed as lost.
+**Implemented:** browser-local Fixture A through the block-4-only MT103 Option-F and single-transaction pacs.008.001.14 adapters; React-independent canonical snapshots; six composable events; grouped component relationships; raw locators and evidence; omitted suffixes; directional loss/origin observations; explicit unknown/unresolved coverage. Fixture A preserves ten relationships. Bundled canonical fixtures C/D/E/F/J demonstrate degradation with explicit correspondence and complete finite evidence where absence is asserted. No discrete MT address structure is inferred.
 
-**Planned for the full MVP:** other taxonomy classifiers, broader address interpretation, and a versioned authoritative public baseline pack following separate evidence review.
+**Roadmap:** normalization, structuring, derivation, alteration, duplication, conflicts and other taxonomy classifiers; broader address interpretation; policy evaluation and a versioned authoritative public baseline pack following separate evidence review.
 
 **Not implemented:** policy evaluation, full MT/XSD validation, network-profile conformance, export/import, a backend, or a database. Payloads stay in browser memory during analysis. See [parser boundaries](docs/architecture/parser-contract.md), [MVP definition](docs/product/mvp-definition.md), and [non-goals](docs/product/non-goals.md).
 
@@ -69,7 +75,7 @@ npm run build
 npm run preview
 ```
 
-Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded; both parties, accounts, identifiers, institutions and payment are fictional. No secrets or credentials are needed.
+Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded. Choose **Fixture D** in the demonstration selector to inspect collapse and selective misplacement, or C/E/F/J for the other cases. All parties, accounts, identifiers, institutions and payments are fictional. No secrets or credentials are needed.
 
 ```sh
 npm run check
@@ -105,6 +111,8 @@ Lineage answers “what happened?” Policy answers “is it acceptable under th
 
 No network conformance is claimed today. [Policy model](docs/domain/policy-engine.md) · [Redistribution boundaries](docs/research/licensing-boundaries.md).
 
+Verification: [second-slice results and limitations](docs/quality/second-slice-verification.md).
+
 ## Documentation
 
 Start at the [documentation index](docs/index.md), then explore [discovery](docs/product/problem-discovery.md), [taxonomy](docs/domain/evaluation-taxonomy.md), [canonical model](docs/domain/canonical-payment-model.md), [decisions](docs/governance/decision-log.md), [research sources](docs/research/source-register.md), and [accepted implementation gate](docs/architecture/implementation-gate.md).
@@ -114,7 +122,7 @@ Start at the [documentation index](docs/index.md), then explore [discovery](docs
 | Phase | Focus | State |
 | --- | --- | --- |
 | 0 | Product definition and repository bootstrap | Bootstrap complete |
-| 1 | MT103 / pacs.008 address MVP | Preservation slice implemented |
+| 1 | MT103 / pacs.008 address MVP | Preservation and degradation slices implemented |
 | 2 | Rule-pack expansion | Future |
 | 3 | More participant roles | Future |
 | 4 | More message families | Future |

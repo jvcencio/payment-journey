@@ -43,3 +43,14 @@ Known defaults require configuration evidence. An unexplained country is UNSOURC
 The brief mentions generated origins, but does not define a GENERATED event in v0.2. **STATUS: OPEN (O-09):** decide how generated values are represented without silently extending this taxonomy. Exact matching thresholds, confidence scale, conflict compatibility rules, and treatment of partial preservation are also open. See [provenance](provenance-model.md).
 
 Parser diagnostics that identify unsupported input/version are distinct from the taxonomy event UNSUPPORTED, which concerns target representational capability. An unsupported parser input does not prove a target format limitation.
+
+## Implemented second-slice rules
+
+PRESERVED, COLLAPSED, MISPLACED, TRUNCATED, LOST and UNSOURCED are implemented within the [second-slice evidence boundary](../architecture/second-slice-boundary.md). The remaining event definitions above describe planned capabilities, not existing classifiers.
+
+- Exact preservation requires matching role, concept, occurrence and value with usable evidence. Similar strings across roles do not prove correspondence.
+- Collapse requires an explicit ordered binding of distinct known address concepts and an exact space-joined target value. Each component receives PRESERVED + COLLAPSED; a specific different target concept adds MISPLACED only to that component. A broader address line does not itself imply misplacement.
+- Truncation requires explicit same-concept prefix correspondence for a name or address line. The target must be a nonempty proper prefix; the missing suffix must contain non-whitespace information. The engine exposes that suffix and decoded-source UTF-16 offsets. It does not infer truncation from arbitrary similarity or classify normalization as truncation.
+- Loss and unsourced origin require complete finite opposite-side and origin evidence. Potential recovery, conflicting correspondence, unknown interpretation or missing evidence remains unresolved. These completeness declarations apply to bundled canonical witnesses, not arbitrary MT/pacs input.
+
+PRESERVED on a collapse component means its information survives with evidenced correspondence; it does not assert faithful structure or placement. Full material accounting can include degradation and is never a policy pass. Confidence and uncertainty shapes for these rules are implemented in the provenance model; broader matching and normalization decisions remain open.

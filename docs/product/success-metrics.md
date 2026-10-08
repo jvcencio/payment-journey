@@ -1,6 +1,6 @@
 # Success metrics
 
-Fixture A demonstrates ten exact-preservation relationships with complete material-node accounting. No production usage, customer validation, or complete-MVP results are claimed. See [first-slice verification](../quality/first-slice-verification.md).
+Fixture A demonstrates ten exact-preservation relationships with complete material-node accounting. Canonical C/D/E/F/J additionally demonstrate six composable events with full finite fixture accounting; see [second-slice verification](../quality/second-slice-verification.md). No production usage, customer validation, or complete-MVP results are claimed. See [first-slice verification](../quality/first-slice-verification.md).
 
 | Measure | Definition | Initial target |
 | --- | --- | --- |

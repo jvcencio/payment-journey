@@ -1,6 +1,6 @@
 # Synthetic fixtures
 
-This directory is reserved for fictional, synthetic test assets. [Fixture A](raw-pairs/a-clean-preservation/README.md) is implemented with raw artifacts and an independent manifest. Other scenarios remain specifications.
+This directory is reserved for fictional, synthetic test assets. [Fixture A](raw-pairs/a-clean-preservation/README.md) is implemented with raw artifacts and an independent manifest. [C/D/E/F/J](canonical/README.md) are executable canonical degradation witnesses; other scenarios remain specifications.
 
 The [fixture specification](../docs/quality/synthetic-fixtures.md) defines mandatory A–J scenarios and additional normalization/negative cases. It distinguishes raw-pair integration tests from canonical-engine tests so structured canonical inputs are never presented as invented MT103 fields.
 

@@ -30,3 +30,41 @@ The engine infers observations from evidence; it cannot recover an undocumented 
 ## Accepted first-slice serialization refinement
 
 Confidence: EXPLICIT, DETERMINISTIC, INFERRED, UNKNOWN, as defined in the [implementation gate](../architecture/implementation-gate.md). Edges may share relationshipGroupId while preserving individually inspectable component events. Pairing is explicitly user-established; no automatic transaction correlation. Lineage observations describe facts; policy findings describe separately evaluated judgments.
+
+## Implemented second-slice serialization
+
+The in-memory model uses typed evidence references, stable element IDs, raw artifact hashes and recoverable UTF-16 locators. CANONICAL_TEST identifies bundled test evidence only. Source, target and transformation-context artifacts remain separately inspectable. The earlier open proposal is historical; the implemented subset is defined in `src/domain/model.ts` and the [second-slice boundary](../architecture/second-slice-boundary.md).
+
+Each component has its own edge. The following abbreviated serialization illustrates D; symbolic IDs stand for the generated resolvable IDs, not an export format:
+
+```json
+[
+  {
+    "sourceElementIds": ["source-building"],
+    "targetElementIds": ["target-street"],
+    "relationshipGroupId": "collapse-binding",
+    "taxonomyEvents": [{"type":"PRESERVED"}, {"type":"COLLAPSED"}, {"type":"MISPLACED"}],
+    "evidenceRefs": ["building-evidence", "street-target-evidence", "context-evidence"]
+  },
+  {
+    "sourceElementIds": ["source-street"],
+    "targetElementIds": ["target-street"],
+    "relationshipGroupId": "collapse-binding",
+    "taxonomyEvents": [{"type":"PRESERVED"}, {"type":"COLLAPSED"}],
+    "evidenceRefs": ["street-source-evidence", "street-target-evidence", "context-evidence"]
+  },
+  {
+    "sourceElementIds": ["source-room"],
+    "targetElementIds": ["target-street"],
+    "relationshipGroupId": "collapse-binding",
+    "taxonomyEvents": [{"type":"PRESERVED"}, {"type":"COLLAPSED"}, {"type":"MISPLACED"}],
+    "evidenceRefs": ["room-evidence", "street-target-evidence", "context-evidence"]
+  }
+]
+```
+
+Full edges also include edgeId, transformationId, confidence and explanation. Coverage counts the shared target once. Context bindings assert correspondence, not events; the engine verifies the value relation, identities and evidence spans before classification. Overlapping or inconsistent bindings remain unresolved.
+
+TRUNCATED carries `missingPortion: {"text":"INGS LLC","start":31,"end":39,"coordinate":"SOURCE_VALUE_UTF16"}` for E. These half-open offsets address the decoded source value; artifact locators independently identify the raw evidence. LOST uses an empty targetElementIds array. UNSOURCED uses an empty sourceElementIds array. Both include the relevant node and complete finite context evidence; neither direction implies a policy finding.
+
+Unresolved records retain elementId, reason and candidateElementIds. Unknown confidence or evidence gaps cannot be repaired by inventing a definitive relationship. Export/import and persisted graph serialization remain deferred.

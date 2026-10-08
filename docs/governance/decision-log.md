@@ -148,3 +148,7 @@ Record date, decision, status, context, rationale, alternatives and why rejected
 - Alternatives: Inferring MT structure, guessing correspondence from text, and assuming unmapped data is absent are excluded by accepted principles.
 - Implications: CANONICAL_TEST is an internal evidence label only. Raw MT/pacs non-matches remain conservative. Absence judgments are bounded to complete fixture scope; no general standards or policy support is implied.
 - Related artifact: [second-slice boundary](../architecture/second-slice-boundary.md).
+
+### D-013 implementation evidence
+
+Completed 2026-10-07 within the authorized boundary. Prefix truncation is limited to names/address lines; completeness is asserted only for finite canonical witnesses. Missing evidence, unknown interpretation, role/occurrence conflicts and recoverable alternatives remain unresolved. No historical ADR rationale was changed. [Second-slice verification](../quality/second-slice-verification.md) records 65 unit/integration and 12 browser tests passing.

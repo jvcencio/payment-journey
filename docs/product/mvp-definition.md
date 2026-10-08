@@ -1,6 +1,6 @@
 # MVP v0.1 — frozen scope
 
-STATUS: Full MVP defined in handoff; first preservation slice implemented under the [accepted gate](../architecture/implementation-gate.md). Other classifiers and policy remain pending.
+STATUS: Full MVP defined in handoff; preservation and fidelity-degradation slices implemented under the [accepted gate](../architecture/implementation-gate.md) and [second-slice boundary](../architecture/second-slice-boundary.md). Remaining taxonomy classifiers and policy remain pending.
 
 ## User flow
 
