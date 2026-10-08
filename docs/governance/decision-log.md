@@ -167,3 +167,13 @@ Completed 2026-10-07 within the authorized boundary. Prefix truncation is limite
 ### D-014 verification
 
 Implemented 2026-10-07. The [third-slice report](../quality/third-slice-verification.md) records 94 unit/integration and 20 browser tests passing, including source metadata, applicability, capability uncertainty and immutable lineage across profile changes. No network-specific rule pack or automatic remediation was added.
+
+## D-015 — Product comprehension and public alpha authorized
+
+- Date: 2026-10-07
+- Status: AUTHORIZED BY PROJECT OWNER.
+- Decision: Translate existing findings into a banking-professional workflow; no new payment-engine capability. Preserve technical evidence through progressive disclosure. Adopt Apache-2.0 for original project work; preserve third-party rights.
+- Evidence: [heuristic product review](../product/product-validation-ux.md), UX-H1 validated within the supplied review evidence, not customer or market validation.
+- UX interpretation: Default prepared scenario is semantic misplacement. Policy selection persists independently of report lifecycle. Cross-border defaults to Don't assume for user-entered pairs unless explicitly selected; any prepared default is disclosed. No fixture-ID-based result sentences.
+- Publication: Preserve all development commits, use public jvcencio/payment-journey on main, and GitHub Pages only after audit and full checks. Stop publication for sensitive material or an unrelated remote/existing target. No tag/release authorized.
+- Discovery only: ABA/routing lookup requires separate source, usage-rights and provenance review.
