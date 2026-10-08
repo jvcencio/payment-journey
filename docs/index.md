@@ -8,6 +8,8 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 
 ## Product
 
+- [Product comprehension review (heuristic)](product/product-validation-ux.md)
+
 - [Problem discovery](product/problem-discovery.md)
 - [Product thesis](product/product-thesis.md)
 - [Personas and jtbd](product/personas-and-jtbd.md)
@@ -53,6 +55,8 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 - [CPMI / PMPG Address Quality Baseline v0.1.0](policy/public-address-quality-v0.1.md)
 
 ## Quality
+
+- [Fourth-slice verification](quality/fourth-slice-verification.md)
 
 - [Third-slice verification](quality/third-slice-verification.md)
 - [Policy fixtures](quality/policy-fixtures.md)
@@ -132,6 +136,7 @@ Accepted decisions come from the bootstrap handoff. Discovery confidence inherit
 │   ├── quality/
 │   │   ├── acceptance-criteria.md
 │   │   ├── first-slice-verification.md
+│   │   ├── fourth-slice-verification.md
 │   │   ├── third-slice-verification.md
 │   │   ├── policy-fixtures.md
 │   │   ├── second-slice-verification.md

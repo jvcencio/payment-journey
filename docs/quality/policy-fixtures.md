@@ -13,6 +13,6 @@ All inputs are fictional. Existing D supplies the flagship collapse/misplacement
 | P4 | Three address lines; hybrid line limit DOES_NOT_ALIGN |
 | P5 | Exact comma-delimited town repetition; PMPG-HYBRID-003 DOES_NOT_ALIGN |
 
-Policy fixtures use an explicitly selected cross-border context and evaluation date 2026-10-07. The UI defaults to Lineage only and cross-border applicability not established. Judgments remain participant-specific: D's creditor has no town and its minimum does not align; the debtor example is not a payment-wide pass.
+Policy fixtures use an explicitly selected cross-border context and evaluation date 2026-10-07. Since Slice 4, the initial prepared showcase selects the public baseline and discloses cross-border example context. User-entered pairs default to cross-border applicability not established unless explicitly chosen. Profile and explicit applicability choices persist across scenarios. Judgments remain participant-specific: D's creditor has no town and its minimum does not align; the debtor example is not a payment-wide pass.
 
 Additional tests cover country missing despite textual presence in AddressLine, 70/71 code-point boundaries including supplementary Unicode, fully unstructured non-applicability, unknown/incomplete evidence, exact versus substring repetition, different-participant identical values, missing/mismatched capability, source statuses and dates, invalid/duplicate versions, resolvable evidence and frozen-report immutability. Existing raw Fixture A and C/D/E/F/J tests remain unchanged in meaning.

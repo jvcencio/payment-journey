@@ -1,80 +1,56 @@
 # Payment Journey
 
-**Status: lineage and first public address-quality policy pack implemented · full MVP in development**
+Validate how postal-address data changes as wire payments move between legacy and ISO 20022 representations.
 
-Trace what happens to payment data as it moves between formats—and identify where meaning is preserved, transformed, degraded, or lost.
+Payment Journey traces what was preserved, merged, misplaced, truncated, lost, or added — then evaluates selected findings against versioned public CPMI/PMPG address-quality guidance.
 
-## Why this exists
+**Public alpha / portfolio project.** Built for payments product, QA, implementation, business analysis, architecture and technology teams working on wire modernization. This is engineering support, not a production compliance platform.
 
-Message validation asks whether an artifact follows a syntax or profile. Payment data integrity asks whether the meaning survived the transformation. Two individually valid messages can still disagree about a payment or lose structure between them. The illustration below is semantic, not a claim that particular messages pass a schema or network profile.
+## See the distinction
 
-## What it does
-
-Payment Journey compares evidence from an explicitly paired synthetic MT103 subset and pacs.008.001.14:
+The default prepared example, **Building number and suite placed in Street Name**, starts with explicitly known synthetic fields:
 
 ```text
-MESSAGE A + MESSAGE B
-         ↓
-      LINEAGE
-   What changed?
-         ↓
-   POLICY PROFILE
-What does the selected authority say?
+Source system knows              Target message contains
+Building number  1200            StreetName  1200 BRICKELL AVE STE 900
+Street name      BRICKELL AVE
+Suite / room     STE 900
 ```
 
-The engine identifies preservation, collapse, misplacement, truncation, loss and unsourced additions. Fixture A uses the supported raw payment pair; bundled canonical witnesses C/D/E/F/J supply explicit evidence for degradation. Raw non-matches remain unresolved without sufficient evidence. Events compose: information can survive while its structure degrades.
+The data survives textually, but building number and suite lose their correct placement. The result is generated from engine observations, not the scenario name.
 
-## Example finding
-
-Implemented Fixture D, selectable in the demo after Fixture A. These are fictional canonical evidence records, not a real party or transaction:
-
-```text
-Source                          Target
-BuildingNumber = 1200           StreetName = "1200 BRICKELL AVE STE 900"
-StreetName = BRICKELL AVE
-Room = STE 900
-```
-
-**Information: preserved. Structure: collapsed. Placement: partially misplaced.**
-
-| Source concept | Implemented events |
+| Debtor assessment | Result |
 | --- | --- |
-| BuildingNumber | PRESERVED, COLLAPSED, MISPLACED |
-| StreetName | PRESERVED, COLLAPSED |
-| Room | PRESERVED, COLLAPSED, MISPLACED |
-
-The three relationships share one group and target value, with separate component evidence. The building number and room survive inside the wrong semantic element. This canonical witness does not imply MT103 supplies discrete fields. The engine reports facts independently of the selected CPMI / PMPG Address Quality Baseline v0.1.0. With cross-border applicability selected, D’s debtor shows:
-
-| Dimension | Result |
-| --- | --- |
-| CPMI minimum country/town | ALIGNS |
-| CPMI preserve available structure | PARTIALLY ALIGNS, with explicit target capability evidence |
-| PMPG structured-element integrity | DOES NOT ALIGN |
+| Information | Preserved, with collapse and selective misplacement |
+| CPMI minimum structured location | ALIGNS |
+| PMPG semantic address quality | DOES NOT ALIGN |
 | Network conformance / institution policy | NOT EVALUATED |
 
-These are participant-specific results, not a payment-wide pass. D’s creditor lacks town and does not align with the minimum. Inspect any finding for its rule, source edition, section, authority and affected lineage evidence. Choosing **Lineage only** leaves the same facts unchanged.
+These findings are per rule and participant, not a whole-payment pass. The same example's creditor lacks town and does not align with the minimum. Selecting a different profile never changes the underlying lineage. Open a finding to inspect its original records, source locators, rule, authority edition and section.
 
-## Core principles
+## Implemented
 
-> Nothing disappears. Nothing appears without explanation.
+- Narrow MT103 Option-F subset → pacs.008.001.14 comparison, one explicitly paired transaction.
+- Debtor/Creditor postal-address analysis, with party-name evidence retained.
+- Semantic lineage and provenance, including grouped field relationships.
+- Composable PRESERVED, COLLAPSED, MISPLACED, TRUNCATED, LOST and UNSOURCED events.
+- Public-address-quality v0.1.0: six CPMI/PMPG rules with versioned authority evidence.
+- Answer-first UI, plain-language scenarios, persistent guidance context and inspectable technical detail.
+- Browser-local, memory-only processing; no payload uploads, analytics or backend.
 
-- Validation is not integrity. Explain findings, rather than merely scoring them.
-- Preserve provenance and the original artifacts. Never silently repair or infer.
-- Never discard semantic information the source already knows.
-- Keep facts separate from policy, and keep unknown data visible.
-- Use synthetic data only. Canonical representation does not confer standards authority.
+Prepared examples supply explicit known fields; they do not pretend MT103 contains every discrete address concept. Raw parser coverage is intentionally narrow. UNKNOWN means evidence is insufficient; NOT APPLICABLE means the rule does not apply. Neither is hidden or converted to a favorable conclusion.
 
-## MVP scope
+**Current alpha scope: Debtor and Creditor postal addresses.** Other parties and agents may carry address requirements depending on the message/profile; they are not assessed here.
 
-**Implemented:** browser-local Fixture A through the block-4-only MT103 Option-F and single-transaction pacs.008.001.14 adapters; React-independent canonical snapshots; six composable events; grouped component relationships; raw locators and evidence; omitted suffixes; directional loss/origin observations; explicit unknown/unresolved coverage. Fixture A preserves ten relationships. Bundled canonical fixtures C/D/E/F/J demonstrate degradation with explicit correspondence and complete finite evidence where absence is asserted. No discrete MT address structure is inferred. The first public pack adds six versioned CPMI/PMPG address-quality rules and separate inspectable policy findings. P1–P5 cover structured and hybrid policy scenarios.
+## Not yet implemented
 
-**Roadmap:** normalization, structuring, derivation, alteration, duplication, conflicts and other taxonomy classifiers; broader address interpretation; further separately reviewed public packs and network profiles.
+Other address-bearing parties/agents; Fedwire or CBPR+ profiles/certification; FAIM; pain.001; multi-hop journeys; ABA/routing-directory enrichment; user/institution rule-pack authoring; export/import or persistence. No Swift, ISO, Fedwire or CBPR+ certification is claimed.
 
-**Not implemented:** full MT/XSD validation, network-specific compliance, export/import, a backend, or a database. Payloads stay in browser memory during analysis. See [parser boundaries](docs/architecture/parser-contract.md), [MVP definition](docs/product/mvp-definition.md), and [non-goals](docs/product/non-goals.md).
+Fedwire remains **PENDING_FINAL_PUBLIC_GUIDELINES** for the November 2027 release. The [source register](docs/research/source-register.md) records the changed timetable and superseded source material. The public guidance pack is not law or regulatory approval.
 
-### Run the fictional demo
+## Run locally
 
-Use Node.js **24.21.0 LTS** (pinned in `.nvmrc`) and npm:
+Use **Node 24.21.0 LTS**, pinned in `.nvmrc`:
 
 ```sh
 npm ci
@@ -82,70 +58,41 @@ npm run build
 npm run preview
 ```
 
-Open the printed localhost URL, then select **Evaluate explicit pair**. Fixture A is preloaded. Choose **Fixture D** in the demonstration selector to inspect collapse and selective misplacement, or C/E/F/J for the other cases. Then choose **CPMI / PMPG Address Quality Baseline v0.1.0** under Evaluation Profile and explicitly select **Evaluate as cross-border** to assess CPMI applicability. The default is Lineage only; profile changes reuse the established report. All parties, accounts, identifiers, institutions and payments are fictional. No secrets or credentials are needed.
+Open the printed local URL. Choose an **Example scenario**, then **Compare these messages**. The default prepared example includes visibly declared cross-border context and the CPMI/PMPG profile. For an entered MT103/pacs.008 pair, applicability defaults to **Don't assume** unless you explicitly choose otherwise. All bundled parties, accounts and transactions are fictional; use only synthetic input.
 
 ```sh
 npm run check
 npx playwright install chromium
 npm run test:browser
+npm audit --audit-level=high
 ```
 
-`npm run dev` is available for local editing. Production preview uses restrictive CSP; the development server permits localhost HMR traffic and style injection. Browser privacy tests target the production build. A static host is not selected or deployed.
+`npm run dev` supports editing. Production CSP blocks connections; local development allows localhost HMR. Privacy tests run against the production build.
 
-## Architecture
+## Architecture and evidence
 
-```mermaid
-flowchart TD
-    A[Source artifact] --> B[Source adapter]
-    C[Target artifact] --> D[Target adapter]
-    B --> E[Canonical snapshot A]
-    D --> F[Canonical snapshot B]
-    E --> G[Lineage / provenance]
-    F --> G
-    G --> H[Policy evaluation]
-    R[Versioned rule packs] --> H
-    H --> I[Integrity report]
-    G --> I
-    A -. Original evidence .-> I
-    C -. Original evidence .-> I
+```text
+Messages / prepared records
+         ↓
+Canonical evidence → factual lineage → what changed?
+                            ↓
+                    selected public guidance
+                            ↓
+                  independent policy findings
 ```
 
-A payment is not a message. Each artifact is evidence from one stage; its canonical snapshot is an interpretation. [Architecture overview](docs/architecture/overview.md).
+The semantic engine is independent of React. Adapters interpret; lineage records facts; the policy layer evaluates a selected authority. All three preserve evidence and uncertainty. [Parser boundary](docs/architecture/parser-contract.md) · [Policy interpretation](docs/policy/public-address-quality-v0.1.md) · [Documentation index](docs/index.md).
 
-## Rule packs
-
-Lineage answers “what happened?” Policy answers “is it acceptable under this selected regime?” The implemented public-address-quality@0.1.0 pack separates **CPMI harmonisation guidance** from **PMPG market practice**. It uses alignment outcomes rather than regulatory pass/fail. CPMI encourages adoption; these harmonisation requirements are not themselves regulation. Future profiles may add network requirements, institution policies and vendor baselines. Vendor behavior does not establish what should happen. Saved evaluations must retain the exact rule versions used.
-
-Network-specific compliance is not implemented. No Fedwire, CBPR+ or ISO certification is claimed. Fedwire is **PENDING_FINAL_PUBLIC_GUIDELINES**, following the November 2027 release deferral. [Public pack sources and interpretation](docs/policy/public-address-quality-v0.1.md). [Policy model](docs/domain/policy-engine.md) · [Redistribution boundaries](docs/research/licensing-boundaries.md).
-
-Verification: [third-slice results and limitations](docs/quality/third-slice-verification.md) · [historical second-slice results](docs/quality/second-slice-verification.md).
-
-## Documentation
-
-Start at the [documentation index](docs/index.md), then explore [discovery](docs/product/problem-discovery.md), [taxonomy](docs/domain/evaluation-taxonomy.md), [canonical model](docs/domain/canonical-payment-model.md), [decisions](docs/governance/decision-log.md), [research sources](docs/research/source-register.md), and [accepted implementation gate](docs/architecture/implementation-gate.md).
+The UX changes respond to [heuristic / independent product review](docs/product/product-validation-ux.md), not customer research or market validation. A cold-use review with an uninvolved payments practitioner is still needed. [Fourth-slice verification](docs/quality/fourth-slice-verification.md).
 
 ## Roadmap
 
-| Phase | Focus | State |
-| --- | --- | --- |
-| 0 | Product definition and repository bootstrap | Bootstrap complete |
-| 1 | MT103 / pacs.008 address MVP | Lineage and first public policy pack implemented |
-| 2 | Rule-pack expansion | Future |
-| 3 | More participant roles | Future |
-| 4 | More message families | Future |
-| 5 | Multi-hop journeys | Future hypothesis |
-| 6 | Regression / CI integration for users | Future hypothesis |
+Broader fidelity classifiers, participant roles and message families require separate authorization and evidence. Further public/network rule packs require source/version/rights review. ABA enrichment remains a research item; it is separate from rule applicability and would require authoritative data access and provenance. [Roadmap](docs/product/roadmap.md).
 
-Project engineering CI belongs in Phase 1; Phase 6 concerns downstream user workflows. No delivery dates are committed. [Implementation plan](docs/architecture/implementation-plan.md).
+## License and contributions
 
-## Project status
+Original Payment Journey source code and project-authored documentation are licensed under [Apache License 2.0](LICENSE). External standards, source publications and third-party software remain owned/licensed by their respective rights holders. Citations and paraphrases do not transfer ownership; the project license does not authorize redistribution of controlled standards content.
 
-This is an early public portfolio project intended for open-source release, under active development. The working name is Payment Journey. **License selection is OPEN; an open-source license has not yet been granted.** See [LICENSE](LICENSE) and [open questions](docs/governance/open-questions.md). Discovery confidence inherited from the handoff is distinguished from independently verified evidence.
+Read [CONTRIBUTING](CONTRIBUTING.md), [standards-source boundaries](docs/research/licensing-boundaries.md) and [SECURITY](SECURITY.md). Do not contribute real payment/customer data, credentials, employer-confidential material or restricted guides.
 
-## Contributing
-
-Payments practitioners, developers, QA engineers, standards specialists, and product managers can help refine the scope, challenge assumptions, and review fictional examples. Start with [CONTRIBUTING.md](CONTRIBUTING.md). Submit only material you are entitled to share; do not contribute employer or customer information.
-
-## Disclaimer
-
-Payment Journey is a standards-analysis and engineering-support project. It is not legal or regulatory advice, does not replace authoritative network documentation, and must not be used to initiate or authorize payments. Every example is synthetic. See [DISCLAIMER.md](DISCLAIMER.md).
+Payment Journey does not initiate or authorize payments and is not legal or regulatory advice. [Disclaimer](DISCLAIMER.md).

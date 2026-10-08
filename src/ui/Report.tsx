@@ -227,8 +227,8 @@ export function Report({
         </p>
         <p aria-label="Material accounting">
           {report.graph.unresolved.length
-            ? 'Incomplete material accounting: some relationships remain unresolved.'
-            : 'All interpreted material elements accounted for.'}{' '}
+            ? 'Some interpreted fields still have unresolved relationships.'
+            : 'All interpreted fields accounted for.'}{' '}
           Accounted for does not mean faithfully preserved or accepted by
           guidance.
         </p>

@@ -250,7 +250,7 @@ for (const [fixtureId, concept, event, absence] of [
     await expect(evidence).toContainText(absence);
     await expect(evidence).toContainText(fixtureId === 'F' ? 'STE 900' : 'CA');
     await expect(page.getByLabel('Material accounting')).toContainText(
-      'All interpreted material elements accounted for',
+      'All interpreted fields accounted for',
     );
   });
 
@@ -324,7 +324,7 @@ test('unresolved raw coverage is visibly different from complete accounting', as
     .fill(target.replace('FABLE PARTS TEST', 'UNEXPLAINED NAME'));
   await compareWithEvidence(page);
   await expect(page.getByLabel('Material accounting')).toContainText(
-    'Incomplete material accounting',
+    'Some interpreted fields still have unresolved relationships',
   );
   await expect(
     page.getByRole('region', { name: 'Unresolved relationships' }),
