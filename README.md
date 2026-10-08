@@ -6,6 +6,10 @@ Payment Journey traces what was preserved, merged, misplaced, truncated, lost, o
 
 **Public alpha / portfolio project.** Built for payments product, QA, implementation, business analysis, architecture and technology teams working on wire modernization. This is engineering support, not a production compliance platform.
 
+## Live demo
+
+[Open Payment Journey](https://jvcencio.github.io/payment-journey/) — public alpha / portfolio project. All bundled examples are synthetic; do not enter real payment data.
+
 ## See the distinction
 
 The default prepared example, **Building number and suite placed in Street Name**, starts with explicitly known synthetic fields:

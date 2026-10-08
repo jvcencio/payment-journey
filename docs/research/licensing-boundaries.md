@@ -32,3 +32,5 @@ The public pack contains original narrow predicates, short paraphrases and full 
 ## Project license decision
 
 D-015 adopts Apache License 2.0 for original Payment Journey code and documentation. External standards, source publications, trademarks and third-party dependencies remain owned/licensed by their respective rights holders. Citations and paraphrased requirements do not transfer ownership. The project license never authorizes redistribution of controlled/licensed standards material. The official license text is preserved in LICENSE.
+
+The published static bundle includes `LICENSE.txt` for original project work and `third-party-notices.txt` for React, React DOM, Scheduler, saxes, xmlchars and Zod, copied from installed package notices (saxes from its official v6.0.0 repository). These are software license notices, not reproduced standards. Public third-party copyright attributions are intentional.

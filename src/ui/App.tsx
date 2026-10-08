@@ -266,7 +266,11 @@ export function App() {
       <footer>
         Standards-analysis and engineering support. Not legal or regulatory
         advice. Public address-quality alignment only. No full XSD, MT, CBPR+ or
-        Fedwire validation or certification. Export/import is not implemented.
+        Fedwire validation or certification. Export/import is not implemented.{' '}
+        <a href={`${import.meta.env.BASE_URL}LICENSE.txt`}>Apache-2.0</a> ·{' '}
+        <a href={`${import.meta.env.BASE_URL}third-party-notices.txt`}>
+          Third-party notices
+        </a>
       </footer>
     </>
   );

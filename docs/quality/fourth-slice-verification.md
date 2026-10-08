@@ -44,7 +44,9 @@ Debtor/Creditor only; narrow MT103 Option-F and pacs.008.001.14 subsets; no netw
 
 The public repository was created at https://github.com/jvcencio/payment-journey with main as default branch, Issues enabled and the requested nine topics. The initial main push preserved the full history; the remote Quality run passed. The origin URL is the repository's HTTPS clone URL. No unrelated remote existed.
 
-The Pages build uses `/payment-journey/`; the full 96-test and 28-browser-test suite also passed locally at that subpath. The Pages workflow separates quality/build from deployment with an explicit dependency, limited permissions and pinned official actions. Only main can deploy. Production CSP and memory-only payload processing remain unchanged. No analytics, secrets or backend were added. GitHub Pages was configured through its API to use Actions; no account UI workaround was needed. Public URL verification remains pending until the deployment completes.
+The Pages build uses `/payment-journey/`; the full 96-test and 28-browser-test suite also passed locally at that subpath. The Pages workflow separates quality/build from deployment with an explicit dependency, limited permissions and pinned official actions. Only main can deploy. Production CSP and memory-only payload processing remain unchanged. No analytics, secrets or backend were added. GitHub Pages was configured through its API to use Actions; no account UI workaround was needed. The Pages quality/build and deploy jobs passed for 583a2ee. The public URL returned HTTP 200 and loaded the application/worker successfully. A Chromium smoke test ran default D and a synthetic raw A sentinel pair on the public site; both results rendered, with zero post-load HTTP/WebSocket requests and no page errors. The live-demo link was added only after this verification.
+
+Public demo: https://jvcencio.github.io/payment-journey/ . Original-code license and dependency notices accompany the static bundle. Subsequent documentation/notice updates use the same gated deployment workflow. No formal release/tag was created.
 
 ```sh
 PAGES_BUILD=true npm exec --yes --package=node@24.21.0 -- npm run check
