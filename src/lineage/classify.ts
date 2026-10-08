@@ -25,6 +25,37 @@ export function classify(
     usedTarget = new Set<string>(),
     blocked = new Map<string, string>();
   const context = transformation.context;
+  const verifiedContext =
+    !!context &&
+    context.evidence.length > 0 &&
+    context.evidence.every((e) => {
+      const artifact = context.artifacts.find(
+        (a) => a.artifactId === e.artifactId,
+      );
+      return (
+        !!artifact &&
+        e.rawValue === artifact.rawPayload.slice(e.locator.start, e.locator.end)
+      );
+    });
+
+  const nodeEvidence = new Map(
+    [...source.evidence, ...target.evidence].map((e) => [e.evidenceId, e]),
+  );
+  for (const node of [...sources, ...targets]) {
+    if (
+      !['EXPLICIT', 'DETERMINISTIC'].includes(node.interpretationConfidence) ||
+      node.evidenceRefs.length === 0 ||
+      !node.evidenceRefs.every(
+        (id) => nodeEvidence.get(id)?.artifactId === node.artifactId,
+      )
+    ) {
+      blocked.set(
+        node.elementId,
+        'Interpretation confidence or artifact evidence is insufficient; no definitive fate or origin was assigned.',
+      );
+    }
+  }
+
   const participant = (snapshot: CanonicalPaymentSnapshot, n: SemanticNode) => {
     const tx = snapshot.transactions.find(
       (t) => t.transactionId === n.transactionId,
@@ -77,6 +108,8 @@ export function classify(
     const t = byId.get(binding.targetElementId),
       ids = [...binding.sourceElementIds, binding.targetElementId];
     const valid =
+      verifiedContext &&
+      ids.every((id) => !blocked.has(id)) &&
       ss.length === binding.sourceElementIds.length &&
       ss.length > 0 &&
       !!t &&
@@ -201,18 +234,6 @@ export function classify(
       );
   }
   // Closed-world judgments are limited to declared complete synthetic evidence.
-  const verifiedContext =
-    !!context &&
-    context.evidence.length > 0 &&
-    context.evidence.every((e) => {
-      const artifact = context.artifacts.find(
-        (a) => a.artifactId === e.artifactId,
-      );
-      return (
-        !!artifact &&
-        e.rawValue === artifact.rawPayload.slice(e.locator.start, e.locator.end)
-      );
-    });
   const possibleCounterparts = (n: SemanticNode, others: SemanticNode[]) =>
     others.filter(
       (other) =>

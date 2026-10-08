@@ -189,4 +189,33 @@ describe('evidence-bound degradation', () => {
       ),
     ).toBe(false);
   });
+  it('does not emit grouped facts with dangling context evidence', async () => {
+    const { w, run } = await example('D');
+    w.context.artifacts = [];
+    expect(run().lineageEdges.some((e) => e.relationshipGroupId)).toBe(false);
+    expect(run().unresolved.length).toBeGreaterThan(0);
+  });
+  it('does not force uncertain interpretation into preservation or absence', async () => {
+    const { w, run } = await example('F');
+    const node = w.source.snapshot.nodes.find(
+      (n) => n.semanticPath === 'address.room',
+    )!;
+    node.interpretationConfidence = 'UNKNOWN';
+    expect(
+      run().lineageEdges.some((e) =>
+        e.sourceElementIds.includes(node.elementId),
+      ),
+    ).toBe(false);
+    expect(
+      run().unresolved.find((u) => u.elementId === node.elementId)?.reason,
+    ).toContain('confidence');
+  });
+  it('rejects explicit same-concept bindings to a conflicting occurrence', async () => {
+    const { w, run } = await example('D');
+    w.target.snapshot.nodes.find(
+      (n) => n.semanticPath === 'address.streetName',
+    )!.occurrence = 1;
+    expect(run().lineageEdges.some((e) => e.relationshipGroupId)).toBe(false);
+    expect(run().unresolved.length).toBeGreaterThan(0);
+  });
 });
