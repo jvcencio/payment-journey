@@ -9,6 +9,7 @@ export default tseslint.config(
       'src/domain/**/*.ts',
       'src/adapters/**/*.ts',
       'src/lineage/**/*.ts',
+      'src/policy/**/*.ts',
       'src/artifacts/**/*.ts',
       'src/application/evaluate.ts',
     ],
