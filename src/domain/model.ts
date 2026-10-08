@@ -26,7 +26,7 @@ export interface Locator {
 }
 export interface Artifact {
   artifactId: string;
-  formatFamily: 'MT' | 'pacs';
+  formatFamily: 'MT' | 'pacs' | 'CANONICAL_TEST';
   messageType: string;
   messageVersion: string;
   parserVersion: string;
@@ -74,7 +74,7 @@ export interface EvidenceReference {
   artifactId: string;
   locator: Locator;
   rawValue: string;
-  kind: 'ARTIFACT';
+  kind: 'ARTIFACT' | 'TRANSFORMATION_CONTEXT';
 }
 export interface UnmappedElement {
   artifactId: string;
@@ -151,12 +151,35 @@ export interface LineageEdge {
   confidence: Confidence;
   evidenceRefs: string[];
   relationshipGroupId?: string;
+  explanation?: string;
+  missingPortion?: {
+    text: string;
+    start: number;
+    end: number;
+    coordinate: 'SOURCE_VALUE_UTF16';
+  };
+}
+export interface CorrespondenceBinding {
+  bindingId: string;
+  kind: 'CONCATENATION' | 'PREFIX';
+  sourceElementIds: string[];
+  targetElementId: string;
+  evidenceRefs: string[];
+}
+export interface LineageContext {
+  sourceComplete: boolean;
+  targetComplete: boolean;
+  originComplete: boolean;
+  bindings: CorrespondenceBinding[];
+  artifacts: Artifact[];
+  evidence: EvidenceReference[];
 }
 export interface Transformation {
   transformationId: string;
   sourceArtifactIds: string[];
   targetArtifactIds: string[];
   pairing: 'USER_SUPPLIED';
+  context?: LineageContext;
 }
 export interface UnresolvedObservation {
   elementId: string;
@@ -174,4 +197,9 @@ export interface LineageReport {
   target: Extract<ParseResult, { ok: true }>;
   transformation: Transformation;
   graph: ProvenanceGraph;
+  demonstration?: {
+    fixtureId: string;
+    kind: 'CANONICAL_WITNESS';
+    description: string;
+  };
 }

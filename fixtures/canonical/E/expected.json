@@ -7,45 +7,35 @@
       "role": "DEBTOR",
       "concept": "name",
       "occurrence": 0,
-      "events": [
-        "TRUNCATED"
-      ]
+      "events": ["TRUNCATED"]
     },
     {
       "side": "SOURCE",
       "role": "DEBTOR",
       "concept": "address.townName",
       "occurrence": 0,
-      "events": [
-        "PRESERVED"
-      ]
+      "events": ["PRESERVED"]
     },
     {
       "side": "SOURCE",
       "role": "DEBTOR",
       "concept": "address.country",
       "occurrence": 0,
-      "events": [
-        "PRESERVED"
-      ]
+      "events": ["PRESERVED"]
     },
     {
       "side": "SOURCE",
       "role": "CREDITOR",
       "concept": "name",
       "occurrence": 0,
-      "events": [
-        "PRESERVED"
-      ]
+      "events": ["PRESERVED"]
     },
     {
       "side": "SOURCE",
       "role": "CREDITOR",
       "concept": "address.country",
       "occurrence": 0,
-      "events": [
-        "PRESERVED"
-      ]
+      "events": ["PRESERVED"]
     }
   ],
   "expectedUnresolved": 0,
