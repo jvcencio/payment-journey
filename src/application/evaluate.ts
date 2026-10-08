@@ -2,7 +2,9 @@ import { z } from 'zod';
 import { capture, MAX_INPUT_CHARS } from '../artifacts/capture';
 import { parseMt103 } from '../adapters/mt103';
 import { parsePacs008 } from '../adapters/pacs008';
-import { preservation } from '../lineage/preservation';
+import { classify } from '../lineage/classify';
+import { canonicalWitness } from '../fixtures/canonical';
+import { bundledWitnesses, FixtureInput } from '../fixtures/catalog';
 import type {
   Diagnostic,
   LineageReport,
@@ -22,6 +24,50 @@ export type EvaluationResult =
       target?: ParseResult;
     };
 export async function evaluate(input: unknown): Promise<EvaluationResult> {
+  const fixture = FixtureInput.safeParse(input);
+  if (fixture.success) {
+    try {
+      const witness = await canonicalWitness(
+        bundledWitnesses[fixture.data.fixtureId],
+      );
+      const transformation: Transformation = {
+        transformationId: `canonical-demo:${witness.fixtureId}`,
+        sourceArtifactIds: [witness.source.artifact.artifactId],
+        targetArtifactIds: [witness.target.artifact.artifactId],
+        pairing: 'USER_SUPPLIED',
+        context: witness.context,
+      };
+      return {
+        ok: true,
+        report: {
+          source: witness.source,
+          target: witness.target,
+          transformation,
+          graph: classify(
+            witness.source.snapshot,
+            witness.target.snapshot,
+            transformation,
+          ),
+          demonstration: {
+            fixtureId: witness.fixtureId,
+            kind: 'CANONICAL_WITNESS',
+            description:
+              'Explicit synthetic canonical evidence. Not extracted from MT103; no new payment adapter or policy evaluation.',
+          },
+        },
+      };
+    } catch {
+      return {
+        ok: false,
+        diagnostics: [
+          {
+            code: 'INVALID_CANONICAL_WITNESS',
+            message: 'The bundled canonical witness could not be verified.',
+          },
+        ],
+      };
+    }
+  }
   const parsed = PairInput.safeParse(input);
   if (!parsed.success)
     return {
@@ -73,7 +119,7 @@ export async function evaluate(input: unknown): Promise<EvaluationResult> {
         source,
         target,
         transformation,
-        graph: preservation(source.snapshot, target.snapshot, transformation),
+        graph: classify(source.snapshot, target.snapshot, transformation),
       },
     };
   } catch {

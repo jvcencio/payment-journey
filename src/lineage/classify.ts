@@ -247,6 +247,28 @@ export function classify(
       }
   }
 
+  if (verifiedContext && context?.sourceComplete && context.originComplete) {
+    for (const t of targets)
+      if (
+        !usedTarget.has(t.elementId) &&
+        !blocked.has(t.elementId) &&
+        participant(target, t) !== undefined &&
+        possibleCounterparts(t, sources).length === 0
+      ) {
+        add(
+          [],
+          [t],
+          [{ type: 'UNSOURCED' }],
+          'No supported provenance was identified in the complete declared source/origin evidence. No source, supported transformation, configuration or normalization explains this target occurrence.',
+          {
+            evidenceRefs: [
+              ...t.evidenceRefs,
+              ...context.evidence.map((e) => e.evidenceId),
+            ],
+          },
+        );
+      }
+  }
   for (const [side, values, used] of [
     ['SOURCE', sources, usedSource],
     ['TARGET', targets, usedTarget],

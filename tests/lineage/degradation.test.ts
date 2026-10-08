@@ -139,4 +139,54 @@ describe('evidence-bound degradation', () => {
     ).toBe(false);
     expect(run().unresolved.length).toBeGreaterThan(0);
   });
+  it('distinguishes an unsourced target from a lost source', async () => {
+    const { w, run } = await example('J');
+    const graph = run();
+    const e = graph.lineageEdges.find((e) =>
+      e.taxonomyEvents.some((t) => t.type === 'UNSOURCED'),
+    )!;
+    expect(e.sourceElementIds).toEqual([]);
+    expect(e.targetElementIds).toHaveLength(1);
+    expect(e.explanation).toContain('No supported provenance');
+    expect(
+      graph.lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'LOST'),
+      ),
+    ).toBe(false);
+    w.context.originComplete = false;
+    expect(
+      run().lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'UNSOURCED'),
+      ),
+    ).toBe(false);
+    expect(run().unresolved).toHaveLength(1);
+  });
+  it('does not fabricate an origin from identical values in a different role', async () => {
+    const { w, run } = await example('J');
+    const creditor = w.source.snapshot.nodes.find(
+      (n) => n.role === 'CREDITOR' && n.semanticPath === 'address.country',
+    )!;
+    creditor.value = 'CA';
+    const e = run().lineageEdges.find((e) =>
+      e.taxonomyEvents.some((t) => t.type === 'UNSOURCED'),
+    )!;
+    const target = w.target.snapshot.nodes.find(
+      (n) => n.elementId === e.targetElementIds[0],
+    )!;
+    expect(target.role).toBe('DEBTOR');
+    expect(e.sourceElementIds).toEqual([]);
+  });
+  it('leaves possibly recoverable origins unresolved when a broader representation exists', async () => {
+    const { w, run } = await example('J');
+    const original = w.source.snapshot.nodes.find(
+      (n) => n.role === 'DEBTOR' && n.semanticPath === 'address.townName',
+    )!;
+    original.semanticPath = 'address.addressLines';
+    original.value = 'COUNTRY CA';
+    expect(
+      run().lineageEdges.some((e) =>
+        e.taxonomyEvents.some((t) => t.type === 'UNSOURCED'),
+      ),
+    ).toBe(false);
+  });
 });
