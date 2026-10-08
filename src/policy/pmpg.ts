@@ -47,3 +47,32 @@ export function evaluateHybrid(ruleId: string, f: AddressFacts): Decision {
     nodes: [...f.structured, ...f.lines],
   };
 }
+
+export function evaluateSemanticIntegrity(f: AddressFacts): Decision {
+  const misplaced = f.edges.filter(
+    (e) =>
+      f.validEdge(e) && e.taxonomyEvents.some((t) => t.type === 'MISPLACED'),
+  );
+  if (misplaced.length)
+    return {
+      outcome: 'DOES_NOT_ALIGN',
+      explanation:
+        'Known distinct address attributes were co-mingled into a structured element representing another semantic concept. The original lineage events remain unchanged.',
+      edges: misplaced,
+      nodes: [],
+    };
+  return f.sourceComplete &&
+    f.targetComplete &&
+    !f.unresolved &&
+    f.edges.every(f.validEdge)
+    ? {
+        outcome: 'ALIGNS',
+        explanation:
+          'No incorrect structured-element placement is evidenced within the complete evaluated lineage scope. This is not an overall address-quality assessment.',
+      }
+    : {
+        outcome: 'UNKNOWN',
+        explanation:
+          'Incomplete or unresolved lineage cannot establish semantic placement alignment.',
+      };
+}

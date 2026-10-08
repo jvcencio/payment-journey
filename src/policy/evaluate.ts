@@ -8,7 +8,7 @@ import type {
 } from './model';
 import { addressFacts, type Decision } from './facts';
 import { evaluateCpmi } from './cpmi';
-import { evaluateHybrid } from './pmpg';
+import { evaluateHybrid, evaluateSemanticIntegrity } from './pmpg';
 import { resolvePack } from './public-address-quality';
 export function authorityActive(rule: DeepReadonly<Rule>, date: string) {
   return (
@@ -49,6 +49,8 @@ export function evaluatePolicy(
           d = evaluateCpmi(rule.ruleId, f, context);
         else if (rule.ruleId.startsWith('PMPG-HYBRID-'))
           d = evaluateHybrid(rule.ruleId, f);
+        else if (rule.ruleId === 'PMPG-ADDR-001')
+          d = evaluateSemanticIntegrity(f);
         const nodes = d.nodes ?? f.target;
         const edges =
           d.edges ??
