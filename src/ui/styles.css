@@ -751,3 +751,113 @@ select:focus-visible {
   margin: 0.3rem 0;
   font-weight: 700;
 }
+
+/* Public-alpha comprehension: answer first, technical details on demand. */
+.hero {
+  padding: 2rem 0 1.2rem;
+  max-width: 1000px;
+}
+.hero h1 {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  margin-bottom: 1rem;
+}
+.hero .intro {
+  font-size: 1.05rem;
+  max-width: 950px;
+}
+.hero > p {
+  margin-bottom: 0.65rem;
+}
+.prepared-records > section {
+  background: #fff;
+  border: 1px solid #ccd6d1;
+  border-radius: 10px;
+  padding: 1rem 1.3rem;
+  min-width: 0;
+}
+.prepared-records dt {
+  color: #52676d;
+}
+.prepared-records dd {
+  margin: 0;
+  font-weight: 600;
+}
+.result-answer {
+  padding: 1.5rem;
+  border-left: 5px solid #a86827;
+  background: #fff5e6;
+  border-radius: 8px;
+  margin: 2rem 0 1rem;
+}
+.result-answer li {
+  margin: 0.35rem 0;
+}
+.coverage-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.coverage-summary span {
+  flex: 1 1 180px;
+  padding: 0.7rem;
+  background: white;
+  border: 1px solid #ccd6d1;
+  border-radius: 6px;
+}
+.event {
+  display: inline-flex;
+  flex-direction: column;
+  white-space: normal;
+  text-align: left;
+  text-transform: none;
+}
+.event small {
+  font-size: 0.65rem;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+}
+.policy-comparison [data-outcome] {
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+[data-outcome='UNKNOWN'] {
+  background: #fff0ce;
+  color: #604414;
+}
+[data-outcome='NOT_APPLICABLE'] {
+  background: #e9edf0;
+  color: #42515a;
+}
+.outcome-guide dl > div {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.outcome-guide dt {
+  font-weight: 700;
+}
+.outcome-guide dd {
+  margin: 0.3rem 0;
+}
+.why-it-matters {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  font-size: 0.95rem;
+}
+.report > details,
+#policy-details {
+  margin: 1.5rem 0;
+}
+#field-lineage > summary,
+#policy-details > details > summary {
+  font-size: 1.1rem;
+  padding: 0.7rem 0;
+}
+select:focus-visible {
+  outline: 3px solid #a94918;
+  outline-offset: 4px;
+}
