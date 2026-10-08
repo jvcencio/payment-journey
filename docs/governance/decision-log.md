@@ -137,3 +137,14 @@ Record date, decision, status, context, rationale, alternatives and why rejected
 - Alternatives: Full transport envelope validation and broader address inference are outside this slice; no replacement parser was needed.
 - Implications: Other input envelopes/components remain unsupported or visible as uninterpreted data; non-matches remain unresolved. No policy findings or persistent exports are produced.
 - Related artifacts: [parser contract](../architecture/parser-contract.md), [verification](../quality/first-slice-verification.md), [dependency review](../architecture/dependency-review.md).
+
+## D-013 — Authorized fidelity-degradation slice
+
+- Date: 2026-10-07
+- Status: AUTHORIZED; implementation boundary recorded for review.
+- Decision: Implement five degradation/origin events using explicit canonical evidence, preserving Fixture A and all accepted engine/UI boundaries.
+- Context: Structured collapse cannot be honestly obtained by inventing structure in the first-slice MT adapter. The authorization permits sufficient explicit canonical evidence.
+- Rationale: Use bundled canonical witness records and reviewed correspondence/completeness context; derive events from verified relationships rather than importing expected events.
+- Alternatives: Inferring MT structure, guessing correspondence from text, and assuming unmapped data is absent are excluded by accepted principles.
+- Implications: CANONICAL_TEST is an internal evidence label only. Raw MT/pacs non-matches remain conservative. Absence judgments are bounded to complete fixture scope; no general standards or policy support is implied.
+- Related artifact: [second-slice boundary](../architecture/second-slice-boundary.md).
