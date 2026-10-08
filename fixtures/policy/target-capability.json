@@ -1,0 +1,12 @@
+{
+  "declarationId": "synthetic-address-target",
+  "version": "1.0.0",
+  "fixtureIds": ["C", "D", "P1", "P2", "P3", "P4", "P5"],
+  "concepts": [
+    "address.buildingNumber",
+    "address.streetName",
+    "address.room",
+    "address.postCode"
+  ],
+  "statement": "Synthetic target design declaration: for these bundled witnesses the selected target can retain building number, street name, room and post code in separate corresponding structured elements. This is independent fixture capability evidence, not inferred canonical capacity or an ISO/network capability claim."
+}

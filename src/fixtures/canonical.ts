@@ -35,7 +35,7 @@ const Reference = z.strictObject({
 });
 const RecordLine = Reference.extend({ value: z.string().min(1).max(4096) });
 const Context = z.strictObject({
-  fixtureId: z.enum(['C', 'D', 'E', 'F', 'J']),
+  fixtureId: z.enum(['C', 'D', 'E', 'F', 'J', 'P1', 'P2', 'P3', 'P4', 'P5']),
   version: z.literal('0.2.0'),
   synthetic: z.literal(true),
   statement: z.string().min(1),

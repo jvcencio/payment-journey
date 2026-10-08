@@ -1,0 +1,10 @@
+{
+  "fixtureId": "P4",
+  "version": "0.2.0",
+  "synthetic": true,
+  "statement": "Fictional finite policy witness. All debtor name/address records are explicit; source and target unchanged. No real payment data.",
+  "sourceCoverage": "COMPLETE",
+  "targetCoverage": "COMPLETE",
+  "originEvidence": "COMPLETE",
+  "bindings": []
+}

@@ -1,0 +1,6 @@
+{"role": "DEBTOR", "concept": "name", "occurrence": 0, "value": "FABLE POLICY TEST"}
+{"role": "DEBTOR", "concept": "address.townName", "occurrence": 0, "value": "MIAMI"}
+{"role": "DEBTOR", "concept": "address.country", "occurrence": 0, "value": "US"}
+{"role": "DEBTOR", "concept": "address.addressLines", "occurrence": 0, "value": "1200 BRICKELL AVE"}
+{"role": "DEBTOR", "concept": "address.addressLines", "occurrence": 1, "value": "SYNTHETIC TOWER"}
+{"role": "DEBTOR", "concept": "address.addressLines", "occurrence": 2, "value": "STE 900"}

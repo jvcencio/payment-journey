@@ -1,0 +1,3 @@
+{"role": "DEBTOR", "concept": "name", "occurrence": 0, "value": "FABLE POLICY TEST"}
+{"role": "DEBTOR", "concept": "address.country", "occurrence": 0, "value": "US"}
+{"role": "DEBTOR", "concept": "address.addressLines", "occurrence": 0, "value": "1200 BRICKELL AVE"}
