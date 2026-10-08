@@ -1,7 +1,10 @@
 import { z } from 'zod';
-export type DeepReadonly<T> = T extends object
-  ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
-  : T;
+export type DeepReadonly<T> = T extends
+  string | number | boolean | null | undefined
+  ? T
+  : T extends object
+    ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+    : T;
 const text = z.string().min(1);
 const date = z.iso.date();
 export const AuthoritySchema = z.strictObject({
