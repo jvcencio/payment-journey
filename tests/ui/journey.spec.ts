@@ -1,3 +1,4 @@
+import { compareWithEvidence, openEvidence } from './helpers';
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 const source = readFileSync(
@@ -13,32 +14,44 @@ test('Fixture A shows canonical participants and inspectable evidence', async ({
   page,
 }) => {
   await page.goto('/');
-  const evaluate = page.getByRole('button', { name: 'Evaluate explicit pair' });
+  await page.getByLabel('Example scenario').selectOption('A');
+  const evaluate = page.getByRole('button', { name: 'Compare these messages' });
   await expect(evaluate).toBeEnabled();
   await evaluate.click();
+  await openEvidence(page);
   await expect(
-    page.getByRole('heading', { name: 'The payment, side by side.' }),
+    page.getByLabel('Comparison result', { exact: true }),
   ).toBeVisible();
   await expect(page.getByRole('button', { name: /^Inspect / })).toHaveCount(10);
   await page
     .getByRole('button', {
-      name: 'Inspect CREDITOR address.country 1',
+      name: 'Inspect CREDITOR Country 1',
       exact: true,
     })
     .click();
   const evidence = page.getByRole('complementary', {
     name: 'Selected observation evidence',
   });
-  await expect(evidence).toContainText('CREDITOR · address.country');
+  await expect(evidence).toContainText('CREDITOR · Country');
   await expect(evidence).toContainText('EXPLICIT');
   await expect(evidence).toContainText('GB');
   await expect(evidence).toContainText('block4/:59F:');
   await expect(evidence).toContainText('/Ctry[1]');
-  await page.getByText('Source unmapped evidence (6)', { exact: true }).click();
+  await page
+    .getByText('Technical proof — parser coverage and original evidence', {
+      exact: true,
+    })
+    .click();
+  await page
+    .getByText('Source fields outside current analysis scope (6)', {
+      exact: true,
+    })
+    .click();
   await expect(page.getByLabel('Source coverage')).toContainText(
     ':70:FICTIONAL TEST PAYMENT ONLY',
   );
   await evaluate.click();
+  await openEvidence(page);
   await expect(page.getByRole('button', { name: /^Inspect / })).toHaveCount(10);
 });
 
@@ -47,8 +60,9 @@ test('evaluation sends no network requests, including payload-bearing requests',
   context,
 }) => {
   await page.goto('/');
+  await page.getByLabel('Example scenario').selectOption('A');
   await expect(
-    page.getByRole('button', { name: 'Evaluate explicit pair' }),
+    page.getByRole('button', { name: 'Compare these messages' }),
   ).toBeEnabled();
   const requests: string[] = [];
   const sockets: string[] = [];
@@ -62,12 +76,12 @@ test('evaluation sends no network requests, including payload-bearing requests',
   page.on('websocket', (socket) => sockets.push(socket.url()));
   const marker = 'SYNTHETIC-PRIVATE-SENTINEL-7C9D';
   await page
-    .getByRole('textbox', { name: 'Source artifact', exact: true })
+    .getByRole('textbox', { name: 'Source message', exact: true })
     .fill(source.replace('FABLE PARTS TEST', marker));
   await page
-    .getByRole('textbox', { name: 'Target artifact', exact: true })
+    .getByRole('textbox', { name: 'Target message', exact: true })
     .fill(target.replace('FABLE PARTS TEST', marker));
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await compareWithEvidence(page);
   await expect(page.getByRole('button', { name: /^Inspect / })).toHaveCount(10);
   await expect(page.getByRole('complementary')).toContainText(marker);
   await page.waitForTimeout(250);
@@ -77,13 +91,14 @@ test('evaluation sends no network requests, including payload-bearing requests',
 
 test('raw XML renders as inert text without injection', async ({ page }) => {
   await page.goto('/');
+  await page.getByLabel('Example scenario').selectOption('A');
   await expect(
-    page.getByRole('button', { name: 'Evaluate explicit pair' }),
+    page.getByRole('button', { name: 'Compare these messages' }),
   ).toBeEnabled();
   const encoded =
     '&lt;img src="https://example.invalid/attack" onerror="window.__attacked=true"&gt;';
   await page
-    .getByRole('textbox', { name: 'Source artifact', exact: true })
+    .getByRole('textbox', { name: 'Source message', exact: true })
     .fill(
       source.replace(
         'FABLE PARTS TEST',
@@ -91,9 +106,9 @@ test('raw XML renders as inert text without injection', async ({ page }) => {
       ),
     );
   await page
-    .getByRole('textbox', { name: 'Target artifact', exact: true })
+    .getByRole('textbox', { name: 'Target message', exact: true })
     .fill(target.replace('FABLE PARTS TEST', encoded));
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await compareWithEvidence(page);
   await expect(page.getByRole('button', { name: /^Inspect / })).toHaveCount(10);
   await expect(page.getByRole('complementary')).toContainText('<img');
   expect(await page.locator('img').count()).toBe(0);
@@ -106,8 +121,9 @@ test('wrong version, hostile XML and multiple transactions show explicit diagnos
   page,
 }) => {
   await page.goto('/');
+  await page.getByLabel('Example scenario').selectOption('A');
   const input = page.getByRole('textbox', {
-    name: 'Target artifact',
+    name: 'Target message',
     exact: true,
   });
   for (const [xml, code] of [
@@ -123,10 +139,10 @@ test('wrong version, hostile XML and multiple transactions show explicit diagnos
     [target.replace('</Document>', ''), 'MALFORMED_XML'],
   ]) {
     await input.fill(xml!);
-    await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+    await compareWithEvidence(page);
     await expect(page.getByRole('alert')).toContainText(code!);
     await expect(
-      page.getByRole('heading', { name: 'The payment, side by side.' }),
+      page.getByLabel('Comparison result', { exact: true }),
     ).toHaveCount(0);
   }
 });
@@ -136,12 +152,14 @@ test('keyboard inspection and narrow screen layout remain usable', async ({
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const evaluate = page.getByRole('button', { name: 'Evaluate explicit pair' });
+  await page.getByLabel('Example scenario').selectOption('A');
+  const evaluate = page.getByRole('button', { name: 'Compare these messages' });
   await expect(evaluate).toBeEnabled();
   await evaluate.focus();
   await page.keyboard.press('Enter');
+  await openEvidence(page);
   const button = page.getByRole('button', {
-    name: 'Inspect DEBTOR address.country 1',
+    name: 'Inspect DEBTOR Country 1',
     exact: true,
   });
   await button.focus();
@@ -158,19 +176,22 @@ test('Fixture D explains shared text and selective component misplacement', asyn
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('combobox', { name: 'Demonstration' }).selectOption('D');
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await page.getByLabel('Example scenario').selectOption('A');
+  await page
+    .getByRole('combobox', { name: 'Example scenario' })
+    .selectOption('D');
+  await compareWithEvidence(page);
   const group = page.getByRole('region', { name: 'Grouped relationship' });
   await expect(group).toContainText('1200 BRICKELL AVE STE 900');
   const building = group.getByRole('button', {
-    name: 'Inspect grouped DEBTOR address.buildingNumber 1',
+    name: 'Inspect grouped DEBTOR Building number 1',
     exact: true,
   });
   await expect(building).toContainText('PRESERVED');
   await expect(building).toContainText('COLLAPSED');
   await expect(building).toContainText('MISPLACED');
   const street = group.getByRole('button', {
-    name: 'Inspect grouped DEBTOR address.streetName 1',
+    name: 'Inspect grouped DEBTOR Street name 1',
     exact: true,
   });
   await expect(street).toContainText('COLLAPSED');
@@ -179,23 +200,22 @@ test('Fixture D explains shared text and selective component misplacement', asyn
   const evidence = page.getByRole('complementary', {
     name: 'Selected observation evidence',
   });
-  await expect(evidence).toContainText(
-    'Relationship group · 3 component edges',
-  );
+  await expect(evidence).toContainText('Relationship group · 3 linked fields');
   await expect(evidence).toContainText('BRICKELL AVE');
   await expect(evidence).toContainText('source/records');
   await expect(evidence).toContainText('target/records');
   await page
-    .getByRole('button', { name: 'Inspect DEBTOR address.room 1', exact: true })
+    .getByRole('button', { name: 'Inspect DEBTOR Suite / room 1', exact: true })
     .click();
   await expect(evidence).toContainText('MISPLACED');
   await evidence
     .getByText('All observation evidence (3)', { exact: true })
     .click();
   await expect(evidence).toContainText('TRANSFORMATION_CONTEXT');
-  await expect(
-    page.getByRole('textbox', { name: 'Source artifact', exact: true }),
-  ).toHaveAttribute('readonly', '');
+  await expect(page.getByRole('textbox')).toHaveCount(0);
+  await expect(page.getByLabel('Source system knows')).toContainText(
+    'BRICKELL AVE',
+  );
   await page.setViewportSize({ width: 390, height: 844 });
   expect(
     await page.evaluate(
@@ -207,25 +227,21 @@ test('Fixture D explains shared text and selective component misplacement', asyn
 for (const [fixtureId, concept, event, absence] of [
   [
     'F',
-    'address.room',
+    'Suite / room',
     'LOST',
     'No supported target representation was found.',
   ],
-  [
-    'J',
-    'address.country',
-    'UNSOURCED',
-    'No supported provenance was identified.',
-  ],
+  ['J', 'Country', 'UNSOURCED', 'No supported provenance was identified.'],
 ] as const)
   test(`Fixture ${fixtureId} exposes directional ${event} evidence`, async ({
     page,
   }) => {
     await page.goto('/');
+    await page.getByLabel('Example scenario').selectOption('A');
     await page
-      .getByRole('combobox', { name: 'Demonstration' })
+      .getByRole('combobox', { name: 'Example scenario' })
       .selectOption(fixtureId);
-    await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+    await compareWithEvidence(page);
     await page
       .getByRole('button', { name: `Inspect DEBTOR ${concept} 1`, exact: true })
       .click();
@@ -242,8 +258,11 @@ test('Fixture E exposes the omitted suffix and decoded offsets', async ({
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('combobox', { name: 'Demonstration' }).selectOption('E');
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await page.getByLabel('Example scenario').selectOption('A');
+  await page
+    .getByRole('combobox', { name: 'Example scenario' })
+    .selectOption('E');
+  await compareWithEvidence(page);
   await expect(page.getByRole('complementary')).toContainText('TRUNCATED');
   await expect(page.getByLabel('Missing source portion')).toContainText(
     'INGS LLC',
@@ -257,8 +276,11 @@ test('Fixture C preserves concepts in a broad address line without misplacement'
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('combobox', { name: 'Demonstration' }).selectOption('C');
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await page.getByLabel('Example scenario').selectOption('A');
+  await page
+    .getByRole('combobox', { name: 'Example scenario' })
+    .selectOption('C');
+  await compareWithEvidence(page);
   const group = page.getByRole('region', { name: 'Grouped relationship' });
   await expect(group).toContainText('Address line');
   await expect(group).toContainText('COLLAPSED');
@@ -270,8 +292,9 @@ test('all canonical evaluations remain browser-local', async ({
   context,
 }) => {
   await page.goto('/');
+  await page.getByLabel('Example scenario').selectOption('A');
   await expect(
-    page.getByRole('button', { name: 'Evaluate explicit pair' }),
+    page.getByRole('button', { name: 'Compare these messages' }),
   ).toBeEnabled();
   const requests: string[] = [];
   await context.route('**/*', (route) => {
@@ -280,11 +303,11 @@ test('all canonical evaluations remain browser-local', async ({
   });
   for (const id of ['D', 'C', 'E', 'F', 'J']) {
     await page
-      .getByRole('combobox', { name: 'Demonstration' })
+      .getByRole('combobox', { name: 'Example scenario' })
       .selectOption(id);
-    await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+    await compareWithEvidence(page);
     await expect(
-      page.getByRole('heading', { name: 'The payment, side by side.' }),
+      page.getByLabel('Comparison result', { exact: true }),
     ).toBeVisible();
   }
   await page.waitForTimeout(250);
@@ -295,14 +318,15 @@ test('unresolved raw coverage is visibly different from complete accounting', as
   page,
 }) => {
   await page.goto('/');
+  await page.getByLabel('Example scenario').selectOption('A');
   await page
-    .getByRole('textbox', { name: 'Target artifact', exact: true })
+    .getByRole('textbox', { name: 'Target message', exact: true })
     .fill(target.replace('FABLE PARTS TEST', 'UNEXPLAINED NAME'));
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await compareWithEvidence(page);
   await expect(page.getByLabel('Material accounting')).toContainText(
     'Incomplete material accounting',
   );
   await expect(
-    page.getByRole('region', { name: 'Unresolved accounting' }),
-  ).toContainText('Unknown evidence is not forced');
+    page.getByRole('region', { name: 'Unresolved relationships' }),
+  ).toContainText('distinct from fields outside current analysis scope');
 });

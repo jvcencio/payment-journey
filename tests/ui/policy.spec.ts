@@ -1,12 +1,16 @@
+import { openAuthority } from './helpers';
 import { expect, test, type Page } from '@playwright/test';
 async function selectPolicy(page: Page, id: string) {
   await page.goto('/');
-  await page.getByLabel('Demonstration').selectOption(id);
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await page.getByLabel('Example scenario').selectOption(id);
+  await page.getByRole('button', { name: 'Compare these messages' }).click();
   await page
     .getByLabel('Evaluation Profile', { exact: true })
     .selectOption('public-address-quality');
-  await page.getByLabel('Cross-border applicability').selectOption('true');
+  await page
+    .getByLabel('Is this payment being evaluated as cross-border?')
+    .selectOption('true');
+  await openAuthority(page);
 }
 test('D minimum and quality judgments differ, with authority and lineage navigation', async ({
   page,
@@ -36,11 +40,11 @@ test('D minimum and quality judgments differ, with authority and lineage navigat
     'https://www.swift.com/swift-resource/252602/download',
   );
   await quality
-    .getByRole('button', { name: /Inspect lineage: DEBTOR address.room/ })
+    .getByRole('button', { name: /Inspect lineage: DEBTOR Suite \/ room/ })
     .click();
   await expect(
     page.getByRole('complementary', { name: 'Selected observation evidence' }),
-  ).toContainText('DEBTOR · address.room');
+  ).toContainText('DEBTOR · Suite / room');
   await expect(
     page.getByRole('complementary', { name: 'Selected observation evidence' }),
   ).toBeFocused();
@@ -67,7 +71,7 @@ test('profile changes do not send parsing requests, mutate lineage presentation 
   });
   await page.goto('/');
   await expect(
-    page.getByRole('button', { name: 'Evaluate explicit pair' }),
+    page.getByRole('button', { name: 'Compare these messages' }),
   ).toBeEnabled();
   const requests: string[] = [];
   const sockets: string[] = [];
@@ -76,8 +80,8 @@ test('profile changes do not send parsing requests, mutate lineage presentation 
     return route.abort();
   });
   page.on('websocket', (s) => sockets.push(s.url()));
-  await page.getByLabel('Demonstration').selectOption('D');
-  await page.getByRole('button', { name: 'Evaluate explicit pair' }).click();
+  await page.getByLabel('Example scenario').selectOption('D');
+  await page.getByRole('button', { name: 'Compare these messages' }).click();
   const group = page.getByLabel('Grouped relationship');
   await expect(group).toBeVisible();
   const before = await group.innerText();
@@ -90,10 +94,13 @@ test('profile changes do not send parsing requests, mutate lineage presentation 
       .getByLabel('Evaluation Profile', { exact: true })
       .selectOption(profile);
     if (profile !== 'none')
-      await page.getByLabel('Cross-border applicability').selectOption('true');
+      await page
+        .getByLabel('Is this payment being evaluated as cross-border?')
+        .selectOption('true');
     expect(await group.innerText()).toBe(before);
   }
   expect(await page.locator('html').getAttribute('data-worker-runs')).toBe('1');
+  await openAuthority(page);
   await expect(
     page.getByRole('article', { name: 'DEBTOR PMPG-ADDR-001', exact: true }),
   ).toContainText('DOES NOT ALIGN');
@@ -121,7 +128,9 @@ test('CPMI scope is explicit and narrow policy details remain usable', async ({
   page,
 }) => {
   await selectPolicy(page, 'D');
-  await page.getByLabel('Cross-border applicability').selectOption('UNKNOWN');
+  await page
+    .getByLabel('Is this payment being evaluated as cross-border?')
+    .selectOption('UNKNOWN');
   await expect(
     page
       .getByRole('article', { name: 'DEBTOR CPMI-ADDR-001', exact: true })
