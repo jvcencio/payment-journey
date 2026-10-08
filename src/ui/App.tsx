@@ -264,7 +264,15 @@ export function App() {
         screening, repair, and future-remediation risk.
       </p>
       <footer>
-        Standards-analysis and engineering support. Not legal or regulatory
+        Built by{' '}
+        <a
+          href="https://jorgevillavicencio.com"
+          rel="author noopener noreferrer"
+          target="_blank"
+        >
+          Jorge Villavicencio
+        </a>
+        . Standards-analysis and engineering support. Not legal or regulatory
         advice. Public address-quality alignment only. No full XSD, MT, CBPR+ or
         Fedwire validation or certification. Export/import is not implemented.{' '}
         <a href={`${import.meta.env.BASE_URL}LICENSE.txt`}>Apache-2.0</a> ·{' '}
