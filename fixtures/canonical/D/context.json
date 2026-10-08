@@ -1,0 +1,36 @@
+{
+  "fixtureId": "D",
+  "version": "0.2.0",
+  "synthetic": true,
+  "statement": "Every party, identifier and address in this canonical test witness is fictional. Not an MT or ISO message.",
+  "sourceCoverage": "COMPLETE",
+  "targetCoverage": "COMPLETE",
+  "originEvidence": "COMPLETE",
+  "bindings": [
+    {
+      "kind": "CONCATENATION",
+      "sources": [
+        {
+          "role": "DEBTOR",
+          "concept": "address.buildingNumber",
+          "occurrence": 0
+        },
+        {
+          "role": "DEBTOR",
+          "concept": "address.streetName",
+          "occurrence": 0
+        },
+        {
+          "role": "DEBTOR",
+          "concept": "address.room",
+          "occurrence": 0
+        }
+      ],
+      "target": {
+        "role": "DEBTOR",
+        "concept": "address.streetName",
+        "occurrence": 0
+      }
+    }
+  ]
+}

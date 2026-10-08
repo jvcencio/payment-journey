@@ -1,0 +1,8 @@
+{"role":"DEBTOR","concept":"name","occurrence":0,"value":"FABLE PARTS TEST"}
+{"role":"DEBTOR","concept":"address.townName","occurrence":0,"value":"EXAMPLE TOWN"}
+{"role":"DEBTOR","concept":"address.country","occurrence":0,"value":"US"}
+{"role":"CREDITOR","concept":"name","occurrence":0,"value":"IMAGINARY SUPPLY TEST"}
+{"role":"CREDITOR","concept":"address.country","occurrence":0,"value":"GB"}
+{"role":"DEBTOR","concept":"address.buildingNumber","occurrence":0,"value":"1200"}
+{"role":"DEBTOR","concept":"address.streetName","occurrence":0,"value":"BRICKELL AVE"}
+{"role":"DEBTOR","concept":"address.room","occurrence":0,"value":"STE 900"}

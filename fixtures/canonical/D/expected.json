@@ -1,0 +1,85 @@
+{
+  "fixtureId": "D",
+  "synthetic": true,
+  "expectedObservations": [
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "name",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.townName",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.country",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "CREDITOR",
+      "concept": "name",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "CREDITOR",
+      "concept": "address.country",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.buildingNumber",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED",
+        "COLLAPSED",
+        "MISPLACED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.streetName",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED",
+        "COLLAPSED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.room",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED",
+        "COLLAPSED",
+        "MISPLACED"
+      ]
+    }
+  ],
+  "expectedUnresolved": 0,
+  "groupedComponents": 3
+}

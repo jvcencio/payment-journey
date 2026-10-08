@@ -1,0 +1,26 @@
+{
+  "fixtureId": "E",
+  "version": "0.2.0",
+  "synthetic": true,
+  "statement": "Every party, identifier and address in this canonical test witness is fictional. Not an MT or ISO message.",
+  "sourceCoverage": "COMPLETE",
+  "targetCoverage": "COMPLETE",
+  "originEvidence": "COMPLETE",
+  "bindings": [
+    {
+      "kind": "PREFIX",
+      "sources": [
+        {
+          "role": "DEBTOR",
+          "concept": "name",
+          "occurrence": 0
+        }
+      ],
+      "target": {
+        "role": "DEBTOR",
+        "concept": "name",
+        "occurrence": 0
+      }
+    }
+  ]
+}

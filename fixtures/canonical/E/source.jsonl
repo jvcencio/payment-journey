@@ -1,0 +1,5 @@
+{"role":"DEBTOR","concept":"name","occurrence":0,"value":"ACME INTERNATIONAL TRADING HOLDINGS LLC"}
+{"role":"DEBTOR","concept":"address.townName","occurrence":0,"value":"EXAMPLE TOWN"}
+{"role":"DEBTOR","concept":"address.country","occurrence":0,"value":"US"}
+{"role":"CREDITOR","concept":"name","occurrence":0,"value":"IMAGINARY SUPPLY TEST"}
+{"role":"CREDITOR","concept":"address.country","occurrence":0,"value":"GB"}

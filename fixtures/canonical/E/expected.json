@@ -1,0 +1,54 @@
+{
+  "fixtureId": "E",
+  "synthetic": true,
+  "expectedObservations": [
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "name",
+      "occurrence": 0,
+      "events": [
+        "TRUNCATED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.townName",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "DEBTOR",
+      "concept": "address.country",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "CREDITOR",
+      "concept": "name",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    },
+    {
+      "side": "SOURCE",
+      "role": "CREDITOR",
+      "concept": "address.country",
+      "occurrence": 0,
+      "events": [
+        "PRESERVED"
+      ]
+    }
+  ],
+  "expectedUnresolved": 0,
+  "groupedComponents": 0,
+  "missingText": "INGS LLC"
+}
