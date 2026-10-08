@@ -58,9 +58,7 @@ export interface CanonicalWitness {
   context: string;
 }
 /** Internal bundled test-evidence reader. Not an upload adapter or payment family. */
-export async function canonicalWitness(
-  raw: CanonicalWitness,
-): Promise<{
+export async function canonicalWitness(raw: CanonicalWitness): Promise<{
   source: Extract<ParseResult, { ok: true }>;
   target: Extract<ParseResult, { ok: true }>;
   context: LineageContext;

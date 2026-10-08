@@ -1,14 +1,6 @@
-import { readFileSync } from 'node:fs';
+import { witnessRaw } from '../helpers/witness';
 import { describe, expect, it } from 'vitest';
 import { canonicalWitness } from '../../src/fixtures/canonical';
-export function witnessRaw(id: string) {
-  const dir = `fixtures/canonical/${id}`;
-  return {
-    source: readFileSync(`${dir}/source.jsonl`, 'utf8'),
-    target: readFileSync(`${dir}/target.jsonl`, 'utf8'),
-    context: readFileSync(`${dir}/context.json`, 'utf8'),
-  };
-}
 describe('canonical witness evidence', () => {
   it.each(['C', 'D', 'E', 'F', 'J'])(
     'retains raw %s records and context references',
