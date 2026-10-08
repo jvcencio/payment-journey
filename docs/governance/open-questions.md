@@ -27,8 +27,12 @@ Resolve only what the next implementation slice needs; do not force future multi
 - O-05: saxes safety spike and project-owned MT parser; numerical resource limits are documented implementation limits.
 - O-06: browser-only, memory-only, no payload egress; host remains open, export/import deferred.
 - O-08: named confidence enum, material name/address scope, role/concept/occurrence correspondence, optional relationshipGroupId. Ambiguous comparisons remain explicit.
-- O-01/O-09/O-10/O-11/O-12 remain open as applicable. O-07 external-authority source review is still required before full MVP release.
+- At the first slice O-01/O-09/O-10/O-11/O-12 remained open as applicable. O-07 external-authority source review is still required before full MVP release.
 
 ## Third-slice resolution
 
 O-07 now has six reviewed public CPMI/PMPG predicates, exact version/source metadata, explicit applicability, alignment outcomes and separately unassigned severity. [D-014](decision-log.md) and the [pack review](../policy/public-address-quality-v0.1.md) supersede the first-slice deferral only for this scope. Broader profiles, conflicts, aggregation and persistent replay remain open.
+
+## Fourth-slice resolutions
+
+O-01: Apache-2.0 adopted for original code/documentation, with third-party rights preserved; contributions follow its submission terms. O-12: public target jvcencio/payment-journey authorized; publication requires audit and quality gates. O-11 practitioner validation remains open. See D-015.

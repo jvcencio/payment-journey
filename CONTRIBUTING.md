@@ -1,6 +1,6 @@
 # Contributing
 
-The first preservation slice is implemented. Contributions must stay within the accepted first-slice scope. Read the [documentation index](docs/index.md), [MVP](docs/product/mvp-definition.md), and [decision log](docs/governance/decision-log.md) before proposing changes.
+Lineage, degradation and the first public address-quality policy pack are implemented. Contributions should follow the documented alpha scope. Read the [documentation index](docs/index.md), [MVP](docs/product/mvp-definition.md), and [decision log](docs/governance/decision-log.md) before proposing changes.
 
 ## Documentation workflow
 
@@ -18,4 +18,4 @@ Use fictional examples created from scratch. Do not submit production payloads, 
 
 Application changes require typed models, tests appropriate to behavior, deterministic fixtures, clear parsing errors, and the checks in the [test strategy](docs/quality/test-strategy.md). Adapters must never determine policy severity. Do not add a new message family or UI role merely because the model permits it.
 
-License selection and contribution licensing terms remain **STATUS: OPEN** (O-01). Review suggestions are welcome; a release must resolve licensing before representing the project as licensed open source.
+Original Payment Journey source code and project-authored documentation are licensed under [Apache-2.0](LICENSE). Contributions intentionally submitted for inclusion follow that license unless explicitly stated otherwise; submit only work you are authorized to contribute. External standards and third-party material retain their own rights. Citations and paraphrases do not transfer ownership or authorize redistribution of controlled standards.
